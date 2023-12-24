@@ -1,12 +1,15 @@
 import React from "react"
+import colors from "./helpers/colors.json"
+import Sidebar from './components/Sidebar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl bg-red-300 font-bold underline">
-        Hello world!
-      </h1>
-    </>
+    <div className={`bg-[#${colors.body}] min-h-screen w-full`}>
+      <Router>
+        <Sidebar colors={colors}/> 
+      </Router>
+    </div>
   )
 }
 
