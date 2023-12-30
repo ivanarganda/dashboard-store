@@ -15,11 +15,11 @@ export const sideBarTop = [
         "icon":<ShoppingCart sx={{fontSize:30}}/>
     },
     {
-        "item":"FavoriteIcon",
+        "item":"Favorites",
         "icon":<FavoriteIcon sx={{fontSize:30}}/>
     },
     {
-        "item":"NotificationsIcon",
+        "item":"Notifications",
         "icon":<NotificationsIcon sx={{fontSize:30}}/>
     },
 

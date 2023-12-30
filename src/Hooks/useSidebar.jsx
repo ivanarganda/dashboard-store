@@ -3,7 +3,7 @@ import { sideBarTop } from '../helpers/sideBarTop';
 import { sidebarBottom } from '../helpers/sidebarBottom';
 import { sidebarMobile } from '../helpers/sidebarMobile';
 
-export const useSidebar = ( position , functions = false )=>{
+export const useSidebar = ( position )=>{
 
     const [ items , setItems ] = useState([]);
 

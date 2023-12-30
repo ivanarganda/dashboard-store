@@ -1,0 +1,492 @@
+{
+    "Laptops": [{
+            "name": "Dell XPS 15",
+            "specifications": {
+                "processor": "Intel Core i7-11800H",
+                "ram": "16GB DDR4",
+                "storage": "512GB SSD",
+                "display": "15.6-inch 4K OLED",
+                "operating_system": "Windows 11",
+                "price": 1899.99
+            }
+        },
+        {
+            "name": "Apple MacBook Pro",
+            "specifications": {
+                "processor": "Apple M1 Pro",
+                "ram": "16GB Unified Memory",
+                "storage": "512GB SSD",
+                "display": "14-inch Retina XDR",
+                "operating_system": "macOS Monterey",
+                "price": 1999.99
+            }
+        },
+        {
+            "name": "HP Envy x360",
+            "specifications": {
+                "processor": "AMD Ryzen 7 5800U",
+                "ram": "16GB DDR4",
+                "storage": "512GB NVMe SSD",
+                "display": "13.3-inch FHD Touchscreen",
+                "operating_system": "Windows 10",
+                "price": 1099.99
+            }
+        },
+        {
+            "name": "Lenovo ThinkPad X1 Carbon",
+            "specifications": {
+                "processor": "Intel Core i7-1165G7",
+                "ram": "16GB LPDDR4x",
+                "storage": "1TB NVMe SSD",
+                "display": "14-inch 4K IPS",
+                "operating_system": "Windows 11",
+                "price": 1599.99
+            }
+        },
+        {
+            "name": "Asus ROG Zephyrus G14",
+            "specifications": {
+                "processor": "AMD Ryzen 9 5900HS",
+                "ram": "32GB DDR4",
+                "storage": "1TB NVMe SSD",
+                "display": "14-inch QHD",
+                "operating_system": "Windows 10",
+                "price": 1399.99
+            }
+        },
+        {
+            "name": "Microsoft Surface Laptop 4",
+            "specifications": {
+                "processor": "Intel Core i5-1135G7",
+                "ram": "8GB LPDDR4x",
+                "storage": "256GB SSD",
+                "display": "13.5-inch PixelSense",
+                "operating_system": "Windows 11",
+                "price": 999.99
+            }
+        },
+        {
+            "name": "Acer Predator Helios 300",
+            "specifications": {
+                "processor": "Intel Core i7-11800H",
+                "ram": "16GB DDR4",
+                "storage": "512GB NVMe SSD",
+                "display": "15.6-inch Full HD 144Hz",
+                "operating_system": "Windows 10",
+                "price": 1299.99
+            }
+        },
+        {
+            "name": "Alienware m15 R6",
+            "specifications": {
+                "processor": "Intel Core i9-11980HK",
+                "ram": "32GB DDR4",
+                "storage": "1TB SSD",
+                "display": "15.6-inch QHD 240Hz",
+                "operating_system": "Windows 11",
+                "price": 2199.99
+            }
+        },
+        {
+            "name": "LG Gram 17",
+            "specifications": {
+                "processor": "Intel Core i7-1165G7",
+                "ram": "16GB DDR4",
+                "storage": "512GB NVMe SSD",
+                "display": "17-inch WQXGA",
+                "operating_system": "Windows 10",
+                "price": 1399.99
+            }
+        },
+        {
+            "name": "Razer Blade 15",
+            "specifications": {
+                "processor": "Intel Core i7-11800H",
+                "ram": "16GB DDR4",
+                "storage": "512GB NVMe SSD",
+                "display": "15.6-inch QHD 165Hz",
+                "operating_system": "Windows 11",
+                "price": 1699.99
+            }
+        }
+    ],
+    "Cameras": [{
+            "name": "Canon EOS 5D Mark IV",
+            "specifications": {
+                "resolution": "30.4 megapixels",
+                "sensor_type": "Full-frame CMOS",
+                "iso_range": "100-32000",
+                "price": 2499.99
+            }
+        },
+        {
+            "name": "Sony Alpha a6400 Mirrorless Camera",
+            "specifications": {
+                "resolution": "24.2 megapixels",
+                "sensor_type": "APS-C CMOS",
+                "iso_range": "100-32000",
+                "price": 899.99
+            }
+        },
+        {
+            "name": "Nikon D850 DSLR Camera",
+            "specifications": {
+                "resolution": "45.7 megapixels",
+                "sensor_type": "Full-frame CMOS",
+                "iso_range": "64-25600",
+                "price": 3299.99
+            }
+        },
+        {
+            "name": "Fujifilm X-T4 Mirrorless Camera",
+            "specifications": {
+                "resolution": "26.1 megapixels",
+                "sensor_type": "APS-C X-Trans CMOS 4",
+                "iso_range": "80-51200",
+                "price": 1699.99
+            }
+        },
+        {
+            "name": "Panasonic Lumix GH5 Mirrorless Camera",
+            "specifications": {
+                "resolution": "20.3 megapixels",
+                "sensor_type": "Micro Four Thirds Live MOS",
+                "iso_range": "200-25600",
+                "price": 1699.99
+            }
+        },
+        {
+            "name": "Nikon Z6 II Mirrorless Camera",
+            "specifications": {
+                "resolution": "24.5 megapixels",
+                "sensor_type": "Full-frame CMOS",
+                "iso_range": "100-51200",
+                "price": 2099.99
+            }
+        },
+        {
+            "name": "Olympus OM-D E-M10 Mark IV Mirrorless Camera",
+            "specifications": {
+                "resolution": "20.3 megapixels",
+                "sensor_type": "Four Thirds Live MOS",
+                "iso_range": "200-25600",
+                "price": 699.99
+            }
+        },
+        {
+            "name": "Leica Q2 Monochrom",
+            "specifications": {
+                "resolution": "47.3 megapixels",
+                "sensor_type": "Full-frame CMOS",
+                "iso_range": "50-100000",
+                "price": 5999.99
+            }
+        },
+        {
+            "name": "Pentax K-1 Mark II DSLR Camera",
+            "specifications": {
+                "resolution": "36.4 megapixels",
+                "sensor_type": "Full-frame CMOS",
+                "iso_range": "100-819200",
+                "price": 1799.99
+            }
+        },
+        {
+            "name": "Sigma fp Mirrorless Camera",
+            "specifications": {
+                "resolution": "24.6 megapixels",
+                "sensor_type": "Full-frame Bayer CMOS",
+                "iso_range": "100-25600",
+                "price": 1899.99
+            }
+        }
+    ],
+    "Keyboards": [{
+            "name": "Logitech G Pro X Mechanical Keyboard",
+            "specifications": {
+                "keyboard_type": "Mechanical",
+                "switches": "GX Blue Clicky",
+                "rgb_lighting": true,
+                "connection": "USB",
+                "price": 149.99
+            }
+        },
+        {
+            "name": "Razer Huntsman Elite Keyboard",
+            "specifications": {
+                "keyboard_type": "Opto-Mechanical",
+                "switches": "Razer Purple",
+                "rgb_lighting": true,
+                "connection": "USB",
+                "price": 169.99
+            }
+        },
+        {
+            "name": "Corsair K70 RGB MK.2 Keyboard",
+            "specifications": {
+                "keyboard_type": "Mechanical",
+                "switches": "Cherry MX Brown",
+                "rgb_lighting": true,
+                "connection": "USB",
+                "price": 129.99
+            }
+        },
+        {
+            "name": "SteelSeries Apex Pro Mechanical Keyboard",
+            "specifications": {
+                "keyboard_type": "Mechanical",
+                "switches": "OmniPoint Adjustable",
+                "rgb_lighting": true,
+                "connection": "USB",
+                "price": 199.99
+            }
+        },
+        {
+            "name": "Ducky One 2 Mini Mechanical Keyboard",
+            "specifications": {
+                "keyboard_type": "Mechanical",
+                "switches": "Cherry MX Red",
+                "rgb_lighting": true,
+                "connection": "USB",
+                "price": 119.99
+            }
+        },
+        {
+            "name": "HyperX Alloy FPS Pro Mechanical Keyboard",
+            "specifications": {
+                "keyboard_type": "Mechanical",
+                "switches": "Cherry MX Blue",
+                "rgb_lighting": false,
+                "connection": "USB",
+                "price": 79.99
+            }
+        },
+        {
+            "name": "ASUS ROG Strix Scope RGB Keyboard",
+            "specifications": {
+                "keyboard_type": "Mechanical",
+                "switches": "Cherry MX Red",
+                "rgb_lighting": true,
+                "connection": "USB",
+                "price": 149.99
+            }
+        },
+        {
+            "name": "Cooler Master CK552 Mechanical Keyboard",
+            "specifications": {
+                "keyboard_type": "Mechanical",
+                "switches": "Gateron Red",
+                "rgb_lighting": true,
+                "connection": "USB",
+                "price": 89.99
+            }
+        },
+        {
+            "name": "DAS Keyboard Model S Professional",
+            "specifications": {
+                "keyboard_type": "Mechanical",
+                "switches": "Cherry MX Brown",
+                "rgb_lighting": false,
+                "connection": "USB",
+                "price": 139.99
+            }
+        },
+        {
+            "name": "Logitech K380 Bluetooth Keyboard",
+            "specifications": {
+                "keyboard_type": "Membrane",
+                "switches": "N/A",
+                "rgb_lighting": false,
+                "connection": "Bluetooth",
+                "price": 39.99
+            }
+        }
+    ],
+    "SSDs": [{
+            "name": "Samsung 970 EVO Plus 1TB NVMe SSD",
+            "specifications": {
+                "capacity": "1TB",
+                "interface": "NVMe PCIe 3.0 x4",
+                "read_speed": "3500 MB/s",
+                "write_speed": "3300 MB/s",
+                "price": 159.99
+            }
+        },
+        {
+            "name": "Crucial MX500 2TB SATA SSD",
+            "specifications": {
+                "capacity": "2TB",
+                "interface": "SATA III",
+                "read_speed": "560 MB/s",
+                "write_speed": "510 MB/s",
+                "price": 249.99
+            }
+        },
+        {
+            "name": "Western Digital Blue SN550 500GB NVMe SSD",
+            "specifications": {
+                "capacity": "500GB",
+                "interface": "NVMe PCIe 3.0 x4",
+                "read_speed": "2400 MB/s",
+                "write_speed": "1750 MB/s",
+                "price": 79.99
+            }
+        },
+        {
+            "name": "Seagate FireCuda 520 1TB NVMe SSD",
+            "specifications": {
+                "capacity": "1TB",
+                "interface": "NVMe PCIe 4.0 x4",
+                "read_speed": "5000 MB/s",
+                "write_speed": "4400 MB/s",
+                "price": 199.99
+            }
+        },
+        {
+            "name": "ADATA SU800 256GB SATA SSD",
+            "specifications": {
+                "capacity": "256GB",
+                "interface": "SATA III",
+                "read_speed": "560 MB/s",
+                "write_speed": "520 MB/s",
+                "price": 39.99
+            }
+        },
+        {
+            "name": "Kingston A2000 500GB NVMe SSD",
+            "specifications": {
+                "capacity": "500GB",
+                "interface": "NVMe PCIe 3.0 x4",
+                "read_speed": "2200 MB/s",
+                "write_speed": "2000 MB/s",
+                "price": 64.99
+            }
+        },
+        {
+            "name": "Toshiba X300 4TB SATA HDD",
+            "specifications": {
+                "capacity": "4TB",
+                "interface": "SATA III",
+                "rotation_speed": "7200 RPM",
+                "cache_size": "128MB",
+                "price": 109.99
+            }
+        },
+        {
+            "name": "SanDisk SSD PLUS 120GB SATA SSD",
+            "specifications": {
+                "capacity": "120GB",
+                "interface": "SATA III",
+                "read_speed": "530 MB/s",
+                "write_speed": "400 MB/s",
+                "price": 29.99
+            }
+        },
+        {
+            "name": "Sabrent Rocket Q 2TB NVMe SSD",
+            "specifications": {
+                "capacity": "2TB",
+                "interface": "NVMe PCIe 3.0 x4",
+                "read_speed": "3200 MB/s",
+                "write_speed": "2900 MB/s",
+                "price": 299.99
+            }
+        },
+        {
+            "name": "Samsung 860 EVO 500GB SATA SSD",
+            "specifications": {
+                "capacity": "500GB",
+                "interface": "SATA III",
+                "read_speed": "550 MB/s",
+                "write_speed": "520 MB/s",
+                "price": 79.99
+            }
+        }
+    ],
+    "HDDs": [{
+            "name": "Seagate Barracuda 2TB SATA HDD",
+            "specifications": {
+                "capacity": "2TB",
+                "interface": "SATA III",
+                "rotation_speed": "7200 RPM",
+                "cache_size": "256MB",
+                "price": 59.99
+            }
+        },
+        {
+            "name": "Western Digital WD Blue 4TB SATA HDD",
+            "specifications": {
+                "capacity": "4TB",
+                "interface": "SATA III",
+                "rotation_speed": "5400 RPM",
+                "cache_size": "64MB",
+                "price": 89.99
+            }
+        },
+        {
+            "name": "Toshiba P300 1TB SATA HDD",
+            "specifications": {
+                "capacity": "1TB",
+                "interface": "SATA III",
+                "rotation_speed": "7200 RPM",
+                "cache_size": "64MB",
+                "price": 44.99
+            }
+        },
+        {
+            "name": "Seagate IronWolf 6TB NAS HDD",
+            "specifications": {
+                "capacity": "6TB",
+                "interface": "SATA III",
+                "rotation_speed": "7200 RPM",
+                "cache_size": "256MB",
+                "price": 169.99
+            }
+        },
+        {
+            "name": "Western Digital Red 3TB NAS HDD",
+            "specifications": {
+                "capacity": "3TB",
+                "interface": "SATA III",
+                "rotation_speed": "5400 RPM",
+                "cache_size": "64MB",
+                "price": 99.99
+            }
+        },
+        {
+            "name": "Hitachi Ultrastar 8TB SAS HDD",
+            "specifications": {
+                "capacity": "8TB",
+                "interface": "SAS 12Gb/s",
+                "rotation_speed": "7200 RPM",
+                "cache_size": "256MB",
+                "price": 219.99
+            }
+        },
+        {
+            "name": "Seagate SkyHawk 4TB Surveillance HDD",
+            "specifications": {
+                "capacity": "4TB",
+                "interface": "SATA III",
+                "rotation_speed": "5900 RPM",
+                "cache_size": "64MB",
+                "price": 119.99
+            }
+        },
+        {
+            "name": "Western Digital Black 1TB Performance HDD",
+            "specifications": {
+                "capacity": "1TB",
+                "interface": "SATA III",
+                "rotation_speed": "7200 RPM",
+                "cache_size": "64MB",
+                "price": 59.99
+            }
+        }
+    ],
+    "Users":[
+        {
+            
+        }
+    ]
+}
