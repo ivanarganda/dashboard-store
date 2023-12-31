@@ -1,8 +1,14 @@
 import React from 'react'
 import SearchForm from './SearchForm';
 import './Header.css';
+import useNavbar from './../../Hooks/useNavbar';
 
-export default function Navbar() {
+export default function Navbar( props ) {
+
+  const { filter } = props;
+
+  const navbarCategories = useNavbar('categories');
+
   return (
     <>
       <main className='lg:pl-28'>
@@ -16,11 +22,13 @@ export default function Navbar() {
           </article>
           <nav className='hidden sm:w-2/3 sm:gap-6 sm:mx-auto sm:justify-center sm:flex md:col-span-7 md:w-2/3 relative m-auto mt-10 text-gray-300 md:flex md:items-center md:justify-between md:content-center px-10 
               after:border-b after:absolute after:bg-white-400 after:w-full after:bottom-0 after:border-b-gray-500'>
-            <a className='w-full hover:text-[#ec7c6a] font-bold cursor-pointer transition-all'>Laptops</a>
-            <a className='w-full hover:text-[#ec7c6a] font-bold cursor-pointer transition-all'>Cameras</a>
-            <a className='w-full hover:text-[#ec7c6a] font-bold cursor-pointer transition-all'>Keyboards</a>
-            <a className='w-full hover:text-[#ec7c6a] font-bold cursor-pointer transition-all'>SSDs</a>
-            <a className='w-full hover:text-[#ec7c6a] font-bold cursor-pointer transition-all'>HDDs</a>
+            {
+              navbarCategories[0]?.map(( item , idx )=>{
+                  return <span key={idx} className={`w-full hover:text-[#ec7c6a] font-bold cursor-pointer transition-all`}>{item.item}</span>
+              })
+            }
+            
+            
           </nav>
         </nav>
         
