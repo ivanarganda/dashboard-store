@@ -5,7 +5,7 @@ export default function RightSidebar( props ) {
   const { typeMenu } = props;
 
   return (
-    <aside >
+    <aside>
         { typeMenu }
     </aside>
   )

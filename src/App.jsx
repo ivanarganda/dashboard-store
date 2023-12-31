@@ -23,7 +23,7 @@ function App() {
   const openMenu = ( type )=>{
 
     const styles = {
-      'nav':'bg-[#1F1D2B] lg:w-1/2 w-full w-full h-full top-0 right-0 fixed transition-all' + ( typeMenu == '' ? '-right-full' : 'right-0' ),
+      'nav':'bg-[#1F1D2B] lg:w-1/2 w-full w-full h-full top-0 right-0 fixed transition-all',
     }
 
     let menus = {
