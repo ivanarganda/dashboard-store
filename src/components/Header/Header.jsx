@@ -5,7 +5,7 @@ export default function Header( props ) {
 
   return (
     <header>
-      <Navbar filter={props.filter}/>
+      <Navbar handleFilter={props.handleFilter} filter={props.filter}/>
     </header>
   )
 }

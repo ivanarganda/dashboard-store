@@ -1,18 +1,18 @@
 import React from 'react'
 import SearchForm from './SearchForm';
 import './Header.css';
-import useNavbar from './../../Hooks/useNavbar';
+import useNavbar from './../../Hooks/estate/useNavbar';
 
 export default function Navbar( props ) {
 
-  const { filter } = props;
+  let { handleFilter , filter } = props;
 
   const navbarCategories = useNavbar('categories');
 
   return (
     <>
-      <main className='lg:pl-28'>
-        <nav className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 items-center justify-center'>
+      <main className='lg:pl-28 bg-[#1F1D2B] fixed w-full top-0 pb-4 z-10 flex flex-col h-25'>
+        <nav className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8'>
           <article className='lg:col-span-4 flex flex-col items-center'>
             <h1 className='text-gray-300 text-2xl'>Ivan Gonzalez Valles</h1>
             <h3 className='text-gray-400'>Sunday,31 Dec 2023</h3>
@@ -24,11 +24,14 @@ export default function Navbar( props ) {
               after:border-b after:absolute after:bg-white-400 after:w-full after:bottom-0 after:border-b-gray-500'>
             {
               navbarCategories[0]?.map(( item , idx )=>{
-                  return <span key={idx} className={`w-full hover:text-[#ec7c6a] font-bold cursor-pointer transition-all`}>{item.item}</span>
+                  let style = 'hover:text-[#ec7c6a]';
+                  if ( filter == '') { filter = 'Laptops' }
+                  if( filter != '' && filter == item.item ){
+                    style = 'text-[#ec7c6a]';
+                  }
+                  return <span key={idx} onClick={()=>handleFilter(item.item)} className={`${ style } font-bold cursor-pointer transition-all`}>{item.item}</span>
               })
-            }
-            
-            
+            }            
           </nav>
         </nav>
         

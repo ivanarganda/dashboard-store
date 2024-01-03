@@ -6,9 +6,9 @@ export default function Sidebar(props) {
 
   return (
     <aside>
-      <SidebarPC showMenu={props.showMenu} functions={props.functions}/> 
+      <SidebarPC initialState={props.initialState} showMenu={props.showMenu} functions={props.functions}/> 
           {/* Mobile menu */}
-      <SidebarMobile showMenu={props.showMenu} functions={props.functions} />
+      <SidebarMobile initialState={props.initialState} showMenu={props.showMenu} functions={props.functions} />
     </aside>
  
   )

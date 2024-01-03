@@ -1,11 +1,11 @@
 import React from 'react'
-import { useSidebar } from '../../Hooks/useSidebar';
+import { useSidebar } from '../../Hooks/estate/useSidebar';
 
 export default function SidebarPC( props ) {
 
   const [ itemsTop ] = useSidebar('top');
 
-  const { functions } = props;
+  const { initialState , functions } = props;
 
   return (
     <nav className={`bg-[#1F1D2B] rounded-tr-xl rounded-br-xl transition-all fixed lg:left-0 -left-full top-0 flex flex-col justify-between fixed top-0 h-full w-28 z-50`}>
@@ -17,7 +17,7 @@ export default function SidebarPC( props ) {
             itemsTop?.map(( item , idx )=>{
               return <li key={idx} className={`hover:bg-[#262837] p-4 rounded-tl-xl rounded-bl-xl transition-all`}>
                     <span onClick={ item.item == 'Home' ? functions[idx] : ()=>functions[idx]( item.item )} className={`hover:text-[#E5E3E3]  hover:bg-[#ec7c6a]  hover:rounded-tl-xl  hover:rounded-tr-xl  hover:rounded-bl-xl  hover:rounded-br-xl  p-4 flex  justify-center  text-[#ec7c6a] cursor-pointer`}>
-                      { item.icon }
+                      { item.icon }{ initialState[idx]}
                     </span>
                 </li>
             })

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { categories } from './../helpers/dataNavbarCategories';
+import { categories } from '../../helpers/dataNavbarCategories';
 
 export default function useNavbar( type ) {
 

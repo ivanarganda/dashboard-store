@@ -1,11 +1,11 @@
 import React from 'react'
-import { useSidebar } from '../../Hooks/useSidebar';
+import { useSidebar } from '../../Hooks/estate/useSidebar';
 
 export default function SidebarMobile(props) {
 
     const [ itemsMobile ] = useSidebar('mobile');
 
-    const { functions } = props;
+    const { initialState , functions } = props;
 
     return (
 

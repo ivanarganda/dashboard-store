@@ -1,7 +1,7 @@
 import React,{ useCallback, useEffect, useState } from 'react'
-import { sideBarTop } from '../helpers/sideBarTop';
-import { sidebarBottom } from '../helpers/sidebarBottom';
-import { sidebarMobile } from '../helpers/sidebarMobile';
+import { sideBarTop } from '../../helpers/sideBarTop';
+import { sidebarBottom } from '../../helpers/sidebarBottom';
+import { sidebarMobile } from '../../helpers/sidebarMobile';
 
 export const useSidebar = ( position )=>{
 
