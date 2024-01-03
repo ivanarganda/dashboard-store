@@ -13,7 +13,8 @@ const products = [
           "display": "15.6-inch 4K OLED",
           "operating_system": "Windows 11",
           "price": 1899.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 2,
@@ -27,7 +28,8 @@ const products = [
           "display": "14-inch Retina XDR",
           "operating_system": "macOS Monterey",
           "price": 1999.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 3,
@@ -41,7 +43,8 @@ const products = [
           "display": "13.3-inch FHD Touchscreen",
           "operating_system": "Windows 10",
           "price": 1099.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 4,
@@ -55,7 +58,8 @@ const products = [
           "display": "14-inch 4K IPS",
           "operating_system": "Windows 11",
           "price": 1599.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 5,
@@ -69,7 +73,8 @@ const products = [
           "display": "14-inch QHD",
           "operating_system": "Windows 10",
           "price": 1399.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 6,
@@ -83,7 +88,8 @@ const products = [
           "display": "13.5-inch PixelSense",
           "operating_system": "Windows 11",
           "price": 999.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 7,
@@ -97,7 +103,8 @@ const products = [
           "display": "15.6-inch Full HD 144Hz",
           "operating_system": "Windows 10",
           "price": 1299.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 8,
@@ -111,7 +118,8 @@ const products = [
           "display": "15.6-inch QHD 240Hz",
           "operating_system": "Windows 11",
           "price": 2199.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 9,
@@ -125,7 +133,8 @@ const products = [
           "display": "17-inch WQXGA",
           "operating_system": "Windows 10",
           "price": 1399.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 10,
@@ -139,7 +148,8 @@ const products = [
           "display": "15.6-inch QHD 165Hz",
           "operating_system": "Windows 11",
           "price": 1699.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 11,
@@ -152,7 +162,8 @@ const products = [
           "focus_points": "61 AF Points",
           "video_resolution": "4K at 30fps",
           "price": 2499.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 12,
@@ -165,7 +176,8 @@ const products = [
           "focus_points": "693 Phase-Detection AF Points",
           "video_resolution": "4K at 30fps",
           "price": 1999.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 13,
@@ -178,7 +190,8 @@ const products = [
           "focus_points": "273 Phase-Detection AF Points",
           "video_resolution": "4K at 30fps",
           "price": 1799.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 14,
@@ -190,7 +203,8 @@ const products = [
           "video_resolution": "5.3K at 60fps",
           "waterproof": "Up to 33ft (10m)",
           "price": 399.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 15,
@@ -203,7 +217,8 @@ const products = [
           "focus_points": "425 Phase-Detection AF Points",
           "video_resolution": "4K at 60fps",
           "price": 1699.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 16,
@@ -216,7 +231,8 @@ const products = [
           "rotation_speed": "7200 RPM",
           "cache_size": "64MB",
           "price": 59.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 17,
@@ -229,7 +245,8 @@ const products = [
           "backlighting": "RGB",
           "connectivity": "Wired",
           "price": 149.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 18,
@@ -242,7 +259,8 @@ const products = [
           "backlighting": "RGB",
           "connectivity": "Wired",
           "price": 169.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 19,
@@ -255,7 +273,8 @@ const products = [
           "backlighting": "RGB",
           "connectivity": "Wired",
           "price": 129.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 20,
@@ -268,7 +287,8 @@ const products = [
           "read_speed": "3500 MB/s",
           "write_speed": "3300 MB/s",
           "price": 199.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 21,
@@ -281,7 +301,8 @@ const products = [
           "read_speed": "560 MB/s",
           "write_speed": "510 MB/s",
           "price": 249.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 22, "name": "Western Digital Blue SN550 500GB NVMe SSD",
@@ -293,7 +314,8 @@ const products = [
           "read_speed": "2400 MB/s",
           "write_speed": "1750 MB/s",
           "price": 69.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 23, "name": "Western Digital Black 1TB Performance HDD",
@@ -305,7 +327,8 @@ const products = [
           "rotation_speed": "7200 RPM",
           "cache_size": "64MB",
           "price": 59.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 24, "name": "Seagate BarraCuda 2TB HDD",
@@ -317,7 +340,8 @@ const products = [
           "rotation_speed": "7200 RPM",
           "cache_size": "256MB",
           "price": 79.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 25, "name": "Toshiba X300 4TB Performance HDD",
@@ -329,7 +353,8 @@ const products = [
           "rotation_speed": "7200 RPM",
           "cache_size": "128MB",
           "price": 129.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 26, "name": "Fujifilm X-T4 Mirrorless Camera",
@@ -340,7 +365,8 @@ const products = [
           "sensor_type": "APS-C X-Trans CMOS 4",
           "iso_range": "80-51200",
           "price": 1699.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 27, "name": "Sony A7R IV Mirrorless Camera",
@@ -351,7 +377,8 @@ const products = [
           "sensor_type": "Full-frame Exmor R CMOS",
           "iso_range": "100-32000",
           "price": 3199.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 28, "name": "Canon EOS M50 Mark II Mirrorless Camera",
@@ -362,7 +389,8 @@ const products = [
           "sensor_type": "APS-C CMOS",
           "iso_range": "100-25600",
           "price": 699.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 29, "name": "Corsair K95 RGB Platinum XT Mechanical Keyboard",
@@ -374,7 +402,8 @@ const products = [
           "rgb_lighting": true,
           "connection": "USB",
           "price": 199.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 30, "name": "Logitech G Pro Wireless Mechanical Keyboard",
@@ -386,7 +415,8 @@ const products = [
           "rgb_lighting": true,
           "connection": "Wireless",
           "price": 179.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 31, "name": "SteelSeries Apex 7 TKL Mechanical Keyboard",
@@ -398,7 +428,8 @@ const products = [
           "rgb_lighting": true,
           "connection": "USB",
           "price": 149.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 32, "name": "Samsung 970 EVO 2TB NVMe SSD",
@@ -410,7 +441,8 @@ const products = [
           "read_speed": "3500 MB/s",
           "write_speed": "3300 MB/s",
           "price": 369.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 33, "name": "Crucial P5 1TB NVMe SSD",
@@ -422,7 +454,8 @@ const products = [
           "read_speed": "3400 MB/s",
           "write_speed": "3000 MB/s",
           "price": 129.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 34, "name": "Western Digital WD Blue 500GB SATA SSD",
@@ -434,7 +467,8 @@ const products = [
           "read_speed": "560 MB/s",
           "write_speed": "530 MB/s",
           "price": 79.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 35, "name": "Samsung 970 EVO 2TB NVMe SSD",
@@ -446,7 +480,8 @@ const products = [
           "read_speed": "3500 MB/s",
           "write_speed": "3300 MB/s",
           "price": 369.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 36, "name": "Crucial P5 1TB NVMe SSD",
@@ -458,7 +493,8 @@ const products = [
           "read_speed": "3400 MB/s",
           "write_speed": "3000 MB/s",
           "price": 129.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 37, "name": "Western Digital WD Blue 500GB SATA SSD",
@@ -470,7 +506,8 @@ const products = [
           "read_speed": "560 MB/s",
           "write_speed": "530 MB/s",
           "price": 79.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 38, "name": "Seagate BarraCuda 4TB Internal HDD",
@@ -482,7 +519,8 @@ const products = [
           "rpm": "5400",
           "cache": "256MB",
           "price": 99.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 39, "name": "Western Digital WD Black 6TB Internal HDD",
@@ -494,7 +532,8 @@ const products = [
           "rpm": "7200",
           "cache": "256MB",
           "price": 219.99
-      }
+      },
+      "quantity":1
   },
   {
       "id": 40, "name": "Toshiba X300 8TB Internal HDD",
@@ -506,7 +545,8 @@ const products = [
           "rpm": "7200",
           "cache": "128MB",
           "price": 249.99
-      }
+      },
+      "quantity":1
   }
 
 ];
@@ -519,22 +559,48 @@ export const initialState = {
 };
 
 export const reducer = (state, action) => {
-  if (action.type === 'ADD_PRODUCT_CART') {
-    let newProduct = action.payload.products.find((product) => product.id === action.payload.id);
-    return {
-      ...state,
-      cart: [...state.cart, newProduct]
-    };
-  }
-  if (action.type === 'ADD_FAVORITE_PRODUCT') {
-    let newProduct = action.payload.products.find((product) => product.id === action.payload.id);
-    return {
-      ...state,
-      favorites: [...state.favorites, newProduct]
-    };
-  }
-  return state;
-};
+    
+    if (action.type === 'ADD_PRODUCT_CART') {
+      let newProduct = action.payload.products.find((product) => product.id === action.payload.id);
+  
+      if (state.cart.some((item) => item.id === action.payload.id)) {
+        // If the product already exists in the cart, increment its quantity
+        return {
+          ...state,
+          cart: state.cart.map((item) =>
+            item.id === action.payload.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          ),
+        };
+      } else {
+        // If the product doesn't exist in the cart, add it with quantity 1
+        return {
+          ...state,
+          cart: [...state.cart, { ...newProduct, quantity: 1 }],
+        };
+      }
+    }
+
+    if (action.type === 'ADD_FAVORITE_PRODUCT') {
+      let newProduct = action.payload.products.find((product) => product.id === action.payload.id);
+      return {
+        ...state,
+        favorites: [...state.favorites, newProduct],
+      };
+    }
+
+    if (action.type === 'DELETE_FAVORITE_PRODUCT') {
+        return {
+          ...state,
+          favorites: state.favorites.filter((item)=> item.id !== action.payload.id ),
+        };
+      }
+
+    return state;
+
+  };
+  
 
 
 export const useProducts = ()=>{

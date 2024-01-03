@@ -34,6 +34,10 @@ function App() {
     dispatch({ type: 'ADD_FAVORITE_PRODUCT', payload: { products , id } })
   }
 
+  const deleteFromFavorites = ( id )=>{
+    dispatch({ type: 'DELETE_FAVORITE_PRODUCT', payload: { products , id } })
+  }
+
   const goToHome = () => {
     setFilter('');
     setTypeMenu('');
@@ -61,7 +65,7 @@ function App() {
   return (
     <div className={`bg-[#262837] min-h-screen w-full`}>
       <Header handleFilter={handleFilter} filter={filter} />
-      <Section initialState={state} products={products} addToCart={addToCart} addToFavorites={addToFavorites} format={{ currentLanguage }} filter={filter} />
+      <Section initialState={state} products={products} addToCart={addToCart} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} format={{ currentLanguage }} filter={filter} />
       <Sidebar initialState={[false, state.cart.length, state.favorites.length, false]} showMenu={showMenu} functions={[goToHome, openMenu, openMenu, openMenu]} />
       <RightSidebar typeMenu={typeMenu} />
     </div>

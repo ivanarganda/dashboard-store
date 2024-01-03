@@ -8,6 +8,7 @@ export default function Section( props ) {
       products={props.products} 
       addToCart={props.addToCart} 
       addToFavorites={props.addToFavorites}
+      deleteFromFavorites={props.deleteFromFavorites}
       state={props.dispatch} 
       format={ props.format } 
       filter={props.filter} 

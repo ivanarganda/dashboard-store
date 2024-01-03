@@ -3,7 +3,7 @@ import React, { useReducer, useEffect } from 'react';
 
 export const Products = (props) => {
 
-  let { initialState , products , addToCart , addToFavorites , format, filter } = props;
+  let { initialState , products , addToCart , addToFavorites , deleteFromFavorites , format, filter } = props;
 
   useEffect(() => {
     console.log(initialState); // Log the updated state after the state has changed
@@ -27,16 +27,10 @@ export const Products = (props) => {
                   <p className='text-gray-400'>{`${p.specifications.price}${format.currentLanguage.currency}`}</p>
                 </div>
                 <div className='flex flex-row justify-around w-full mt-10'>
-                  {
-                    initialState.cart.find((index)=>index.id === p.id ) ? 
-                      <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => { dispatch({ type: 'DELETE_PRODUCT_CART', payload: p.id }); }}>Delete from cart</button> 
-                      : 
-                      <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => addToCart(p.id)}>Add to cart</button>
-                  }
-                  
+                     <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => addToCart(p.id)}>Add to cart</button>
                   {
                     initialState.favorites.find((index)=>index.id === p.id ) ? 
-                      <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => { dispatch({ type: 'DELETE_FAVORITE_PRODUCT', payload: p.id }); }}>Delete from favorites</button> 
+                      <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => { deleteFromFavorites(p.id); }}>Delete from favorites</button> 
                       : 
                       <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => { addToFavorites(p.id); }}>Add to favorites</button>
                   }
