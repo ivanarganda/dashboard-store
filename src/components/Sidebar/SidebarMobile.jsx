@@ -5,7 +5,7 @@ export default function SidebarMobile(props) {
 
     const [ itemsMobile ] = useSidebar('mobile');
 
-    const { initialState , functions } = props;
+    const { initialState , typeMenu , functions } = props;
 
     return (
 
@@ -13,8 +13,14 @@ export default function SidebarMobile(props) {
             <ul className='flex flex-row justify-between flex-gap-1 p-3'>
                 {
                     itemsMobile?.map(( li , idx )=>{ 
+
+                        var active = 'hover:text-white';
+                        if ( li.item === typeMenu ){
+                            active = 'text-[#ec7c6a]';
+                        }
+
                         return <li className='pl-2 pr-2' key={li.item}>
-                            <span onClick={ li.item == 'Home' ? functions[idx] : ()=>functions[idx]( li.item )} className='hover:text-white text-[#bbb] transition-all cursor-pointer'>{li.icon}</span>
+                            <span onClick={ li.item == 'Home' ? functions[idx] : ()=>functions[idx]( li.item )} className={`${active} text-[#bbb] transition-all cursor-pointer`}>{ li.icon }{ initialState[idx]}</span>
                             </li> 
                     })
                 }

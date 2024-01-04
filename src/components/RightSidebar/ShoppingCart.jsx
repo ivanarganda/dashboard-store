@@ -1,12 +1,15 @@
 import React from 'react'
 
+
 export default function ShoppingCart( props ) {
 
-  const { styles } = props; 
+  const { cart } = props; 
 
   return (
-    <nav className={`${styles.nav}`}>
-      ShoppingCart
-    </nav>
+    
+      <section>
+        Shooping cart
+      </section>
+    
   )
 }

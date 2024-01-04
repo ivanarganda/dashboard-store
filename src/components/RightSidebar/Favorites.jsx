@@ -5,8 +5,8 @@ export default function Favorites( props ) {
   const { styles } = props; 
 
   return (
-    <nav className={`${styles.nav}`} >
+    <section>
       Favorites
-    </nav>
+    </section>
   )
 }

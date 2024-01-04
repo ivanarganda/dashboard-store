@@ -4,11 +4,13 @@ import SidebarMobile from './SidebarMobile';
 
 export default function Sidebar(props) {
 
+  console.log( props );
+
   return (
     <aside>
-      <SidebarPC initialState={props.initialState} showMenu={props.showMenu} functions={props.functions}/> 
+      <SidebarPC initialState={props.initialState} showMenu={props.showMenu} typeMenu={props.typeMenu} functions={props.functions}/> 
           {/* Mobile menu */}
-      <SidebarMobile initialState={props.initialState} showMenu={props.showMenu} functions={props.functions} />
+      <SidebarMobile initialState={props.initialState} showMenu={props.showMenu} typeMenu={props.typeMenu} functions={props.functions} />
     </aside>
  
   )

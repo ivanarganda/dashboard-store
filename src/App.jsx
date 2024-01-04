@@ -17,6 +17,7 @@ function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [filter, setFilter] = useState('');
   const [typeMenu, setTypeMenu] = useState('');
+  const [ type , setType ] = useState('');
   const [currentLanguage] = useLanguage('en');
   const [products , setProducts ] = useState([]);
 
@@ -41,33 +42,44 @@ function App() {
   const goToHome = () => {
     setFilter('');
     setTypeMenu('');
+    setType('');
+    setShowMenu(false);
   }
 
   const handleFilter = (filter) => {
     setFilter(filter);
   }
 
-  const openMenu = (type) => {
-    const styles = {
-      'nav': 'bg-[#1C1F2F] rounded-xl border-l border-gray-700 lg:w-1/2 w-full w-full h-full top-0 right-0 fixed transition-all z-20',
-    }
+  const styles = {
+    'nav': 'rgba(0, 0, 0, 0.8) rounded-xl border-l border-gray-700 lg:w-full w-full w-full h-full top-40 right-0 fixed transition-all z-20',
+    'sections':''
+  }
+
+  const closeMenu = ()=>{
+    setTypeMenu('')
+    setType('');
+    setShowMenu(false);
+  }
+
+  const openMenu = (type) => { 
 
     let menus = {
-      'ShoppingCart': <ShoppingCart styles={styles} />,
-      'Favorites': <Favorites styles={styles} />,
-      'Notifications': <Notifications styles={styles} />
+      'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state.cart} />,
+      'Favorites': <Favorites styles={styles.sections} />,
+      'Notifications': <Notifications styles={styles.sections} />
     }
 
     setTypeMenu(menus[type])
-
+    setType(type);
+    setShowMenu(true);
   }
 
   return (
     <div className={`bg-[#262837] min-h-screen w-full`}>
       <Header handleFilter={handleFilter} filter={filter} />
       <Section initialState={state} products={products} addToCart={addToCart} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} format={{ currentLanguage }} filter={filter} />
-      <Sidebar initialState={[false, state.cart.length, state.favorites.length, false]} showMenu={showMenu} functions={[goToHome, openMenu, openMenu, openMenu]} />
-      <RightSidebar typeMenu={typeMenu} />
+      <Sidebar  initialState={[false, state.cart.length, state.favorites.length, false]} typeMenu={type} showMenu={showMenu} functions={[goToHome, openMenu, openMenu, openMenu]} />
+      <RightSidebar styles={styles.nav} showMenu={showMenu} typeMenu={typeMenu} closeMenu={closeMenu} />
     </div>
   )
 }

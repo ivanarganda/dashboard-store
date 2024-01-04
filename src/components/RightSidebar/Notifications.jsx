@@ -5,8 +5,8 @@ export default function Notifications( props ) {
   const { styles } = props;
   
   return (
-    <nav className={`${styles.nav}`}>
+    <section>
       Notifications
-    </nav>
+    </section>
   )
 }
