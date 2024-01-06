@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 
 export const Products = (props) => {
@@ -24,15 +24,15 @@ export const Products = (props) => {
               <figcaption className='w-full flex flex-col items-center justify-center mt-20'>
                 <div>
                   <p className='text-gray-100'>{p.name}</p>
-                  <p className='text-gray-400'>{`${p.specifications.price}${format.currentLanguage.currency}`}</p>
+                  <p className='text-white'>{`${p.specifications.price}${format.currentLanguage.currency}`}</p>
                 </div>
                 <div className='flex flex-row justify-around w-full mt-10'>
-                     <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => addToCart(p.id)}>Add to cart</button>
+                     <button className='bg-[#262837] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => addToCart(p.id)}>Add to cart</button>
                   {
                     initialState.favorites.find((index)=>index.id === p.id ) ? 
-                      <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => { deleteFromFavorites(p.id); }}>Delete from favorites</button> 
+                      <button className='bg-[#ec7c6a] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => { deleteFromFavorites(p.id); }}>Delete from favorites</button> 
                       : 
-                      <button className='bg-[#ec7c6a] p-2 rounded-md text-gray-100 hover:bg-[#ec7b8c] hover:text-gray-600' onClick={() => { addToFavorites(p.id); }}>Add to favorites</button>
+                      <button className='bg-[#262837] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => { addToFavorites(p.id); }}>Add to favorites</button>
                   }
                 </div>
               </figcaption>

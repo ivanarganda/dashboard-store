@@ -11,6 +11,7 @@ import Notifications from './components/RightSidebar/Notifications';
 import useLanguage from "./Hooks/estate/useLanguage";
 
 import { reducer , initialState , useProducts } from './Hooks/reducer/useProducts';
+import { useLocalStorage } from './Hooks/estate/useLocalStorage';
 
 function App() {
 
@@ -20,13 +21,22 @@ function App() {
   const [ type , setType ] = useState('');
   const [currentLanguage] = useLanguage('en');
   const [products , setProducts ] = useState([]);
+  const [state, dispatch] = useReducer(reducer , initialState);
 
   useEffect(()=>{
     setProducts( useProducts() );
+    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    recoveryCart( savedCart ); 
   },[initialState])
 
-  const [state, dispatch] = useReducer(reducer , initialState);
+  useEffect(()=>{
+    localStorage.setItem('cart', JSON.stringify(state.cart)) || [];
+  },[state]) 
 
+  const recoveryCart = ( cart )=>{
+    dispatch({ type: 'RECOVERY_CART' , payload: cart}) 
+  }
+  
   const addToCart = ( id )=>{
     dispatch({ type: 'ADD_PRODUCT_CART', payload: { products , id } });
   }
@@ -51,8 +61,8 @@ function App() {
   }
 
   const styles = {
-    'nav': 'rgba(0, 0, 0, 0.8) rounded-xl border-l border-gray-700 lg:w-full w-full w-full h-full top-40 right-0 fixed transition-all z-20',
-    'sections':''
+    'aside': `bg-black bg-opacity-80 w-full h-screen overflow-auto top-0 ${showMenu ? 'right-0' : '-right-full'} z-20 transition-all fixed text-white flex flex-col justify-around items-start`,
+    'sections':'h-3/4 md:h-2/3 lg:h-full lg:pb-10 w-full flex flex-col justify-center items-center relative md:w-full lg:w-full overflow-auto'
   }
 
   const closeMenu = ()=>{
@@ -64,14 +74,15 @@ function App() {
   const openMenu = (type) => { 
 
     let menus = {
-      'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state.cart} />,
+      'ShoppingCart': <ShoppingCart  styles={styles.sections} cart={state.cart} />,
       'Favorites': <Favorites styles={styles.sections} />,
       'Notifications': <Notifications styles={styles.sections} />
     }
 
     setTypeMenu(menus[type])
-    setType(type);
     setShowMenu(true);
+    setType(type);
+
   }
 
   return (
@@ -79,7 +90,7 @@ function App() {
       <Header handleFilter={handleFilter} filter={filter} />
       <Section initialState={state} products={products} addToCart={addToCart} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} format={{ currentLanguage }} filter={filter} />
       <Sidebar  initialState={[false, state.cart.length, state.favorites.length, false]} typeMenu={type} showMenu={showMenu} functions={[goToHome, openMenu, openMenu, openMenu]} />
-      <RightSidebar styles={styles.nav} showMenu={showMenu} typeMenu={typeMenu} closeMenu={closeMenu} />
+      <RightSidebar styles={styles.aside} typeMenu={typeMenu} type={type} closeMenu={closeMenu} />
     </div>
   )
 }

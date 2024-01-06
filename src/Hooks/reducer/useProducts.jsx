@@ -3,11 +3,18 @@ import { products } from './../../helpers/products';
 
 export const initialState = {
   favorites: [],
-  cart: [],
+  cart: JSON.parse(localStorage.getItem('cart')) || [],
   totalPriceCart: 0,
 };
 
 export const reducer = (state, action) => {
+
+    if (action.type === 'RECOVERY_CART'){
+      return {
+        ...state,
+        cart: action.payload
+      }
+    } 
     
     if (action.type === 'ADD_PRODUCT_CART') {
       let newProduct = action.payload.products.find((product) => product.id === action.payload.id);
@@ -29,6 +36,7 @@ export const reducer = (state, action) => {
           cart: [...state.cart, { ...newProduct, quantity: 1 }],
         };
       }
+      
     }
 
     if (action.type === 'ADD_FAVORITE_PRODUCT') {
