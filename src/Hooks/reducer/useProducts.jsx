@@ -39,6 +39,20 @@ export const reducer = (state, action) => {
       
     }
 
+    if (action.type === 'ADD_QUANTITY_PRODUCT_CART'){
+      if (state.cart.some((item) => item.id === action.payload.id)) {
+        // If the product already exists in the cart, increment its quantity
+        return {
+          ...state,
+          cart: state.cart.map((item) =>
+            item.id === action.payload.id
+              ? { ...item, quantity: parseInt(action.payload.newQuantity) }
+              : item
+          ),
+        };
+      }
+    }
+
     if (action.type === 'ADD_FAVORITE_PRODUCT') {
       let newProduct = action.payload.products.find((product) => product.id === action.payload.id);
       return {

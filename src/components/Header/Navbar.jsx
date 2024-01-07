@@ -2,10 +2,13 @@ import React from 'react'
 import SearchForm from './SearchForm';
 import './Header.css';
 import useNavbar from './../../Hooks/estate/useNavbar';
+import { useDate } from './../../Hooks/estate/useDate';
 
 export default function Navbar( props ) {
 
   let { handleFilter , filter } = props;
+
+  const [ currentDate ] = useDate();
 
   const navbarCategories = useNavbar('categories');
 
@@ -15,7 +18,7 @@ export default function Navbar( props ) {
         <nav className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8'>
           <article className='lg:col-span-4 flex flex-col items-center'>
             <h1 className='text-gray-300 text-2xl'>Ivan Gonzalez Valles</h1>
-            <p className='text-gray-400'>Sunday,31 Dec 2023</p>
+            <p className='text-gray-400'>{currentDate}</p> 
           </article>
           <article className='lg:col-span-3 sm:w-1/2 md:w-2/3 m-auto lg:w-full w-2/3 relative'>
             <SearchForm />

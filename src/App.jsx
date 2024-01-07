@@ -11,7 +11,6 @@ import Notifications from './components/RightSidebar/Notifications';
 import useLanguage from "./Hooks/estate/useLanguage";
 
 import { reducer , initialState , useProducts } from './Hooks/reducer/useProducts';
-import { useLocalStorage } from './Hooks/estate/useLocalStorage';
 
 function App() {
 
@@ -35,6 +34,16 @@ function App() {
 
   const recoveryCart = ( cart )=>{
     dispatch({ type: 'RECOVERY_CART' , payload: cart}) 
+  }
+
+  const handleChangeQuantity = ( id , event )=>{
+
+    let newQuantity = event.value;
+
+    if ( newQuantity != '' ){
+      dispatch({ type: 'ADD_QUANTITY_PRODUCT_CART', payload: { newQuantity , id } });  
+    }
+   
   }
   
   const addToCart = ( id )=>{
@@ -74,9 +83,9 @@ function App() {
   const openMenu = (type) => { 
 
     let menus = {
-      'ShoppingCart': <ShoppingCart  styles={styles.sections} cart={state.cart} />,
+      'ShoppingCart': <ShoppingCart  styles={styles.sections} cart={state.cart} handleChangeQuantity={handleChangeQuantity} />,
       'Favorites': <Favorites styles={styles.sections} />,
-      'Notifications': <Notifications styles={styles.sections} />
+      'Notifications': <Notifications styles={styles.sections} /> 
     }
 
     setTypeMenu(menus[type])

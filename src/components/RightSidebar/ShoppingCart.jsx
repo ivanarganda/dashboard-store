@@ -5,12 +5,12 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 
 export default function ShoppingCart( props ) {
 
-  const { styles , cart } = props;
+  const { styles , cart , handleChangeQuantity } = props;
   
   const [ itemsShopping , setItemsShopping ] = useState([]);
 
   const [ currentPage , setCurrentPage ] = useState(1);
-
+ 
   const loadProductsCart = ()=>{
         return cart;
   }
@@ -50,7 +50,7 @@ export default function ShoppingCart( props ) {
                           </span> 
                         </label>
                     </form>
-                    <span className='w-50'><b>Quantity:</b><input type='text' className='text-black font-bold w-6 outline-none' defaultValue={item.quantity} /></span>
+                    <span className='w-50'><b>Quantity:</b><input type='text' className='text-black font-bold w-6 outline-none' defaultValue={item.quantity} onChange={()=>handleChangeQuantity(item.id,event.target)} /></span>
                     <div>
                       ${item.specifications.price}
                     </div>
@@ -67,8 +67,11 @@ export default function ShoppingCart( props ) {
           page={currentPage}
           showFirstButton 
           showLastButton 
-          sx={{marginTop:'3rem',color:'white',background:'white',borderRadius:'0.4rem 0.4rem 0.4rem 0.4rem',width:'50%',minWidth:'350px',margin:'auto'}} count={Math.ceil(itemsShopping.length / 3)} color='primary'
-          size="large"/> : 
+          sx={{marginTop:'3rem',color:'white',background:'white',borderRadius:'0.4rem 0.4rem 0.4rem 0.4rem',width:'50%',minWidth:'350px',margin:'auto','@media (max-width: 400px)': {
+            width: '80%',
+            minWidth: '250px',
+          },}} count={Math.ceil(itemsShopping.length / 3)} color='primary'
+          size={"medium"}/> : 
         
           ( <div className='flex flex-col justify-center items-center w-full h-full'>
               <RemoveShoppingCartIcon sx={{fontSize:'100px'}}/>
