@@ -46,9 +46,10 @@ function App() {
     if (index && query.trim() !== '') {
       const filtered = products.filter((product) => { 
         return (
-          product.category.includes(query) ||
-          product.name.includes(query) ||
-          product.id.toString().includes(query)
+          (product.category && product.category.includes(query)) ||
+          (product.name && product.name.includes(query)) ||
+          (product.specifications && product.specifications.processor && product.specifications.processor.includes(query)) ||
+          (product.id && product.id.toString().includes(query))
         );
       });
       setFilteredProducts(filtered);
@@ -56,7 +57,7 @@ function App() {
       setFilteredProducts(products); // Show all products when search is empty
     }
   }
-
+  
   useEffect(() => {
     axios.get(`https://ws-dashboard-store.onrender.com/api/products`).then((response) => {
       setProducts(response.data);
@@ -65,9 +66,6 @@ function App() {
       // Build the search index
       const index = buildSearchIndex(response.data);
       setSearchIndex(index);
-
-      // Perform initial search
-      performSearch(state.q, index);
     });
   }, []);
 
@@ -82,9 +80,8 @@ function App() {
 
   useEffect(() => {
     // Perform search whenever state.q changes
-    console.log( state );
     performSearch(state.q, searchIndex);
-  }, [state.q, searchIndex, products]);
+  }, [state.q,searchIndex]);
 
   const recoveryCart = (cart) => {
     dispatch({ type: 'RECOVERY_CART', payload: cart });
