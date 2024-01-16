@@ -3,21 +3,16 @@ import React, { useEffect } from 'react';
 
 export const Products = (props) => {
 
-  let { initialState , products , addToCart , addToFavorites , deleteFromFavorites , format, filter } = props;
-
-  useEffect(() => {
-    console.log(initialState); // Log the updated state after the state has changed
-  }, [initialState]); // This will trigger the effect whenever the 'state' changes
+  let { loading , initialState , products , addToCart , addToFavorites , deleteFromFavorites , format } = props;
 
   return (
     <section className='mt-20 pt-20 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
-      {products?.map((p, idx) => {
+      
+      {
+      loading ? <span className="w-full min-h-screen flex flex-col m-80 text-5xl text-gray-300">Loading...</span> :
+      products?.map((p, idx) => {
 
-        if (filter === '') {
-          filter = 'Laptops';
-        }
-
-        return filter === p.category && (
+        return  (
           <article className='flex flex-col justify-center items-center mt-20' key={idx}>
             <figure className='bg-gray-200 bg-opacity-10 w-80 h-80 relative flex flex-col justify-center items-center text-gray-400 rounded-xl'>
               <img src={p.url} className='w-40 h-40 rounded-full absolute -top-14 border border-[#bbb]' alt="" />

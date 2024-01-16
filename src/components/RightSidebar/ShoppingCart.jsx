@@ -12,7 +12,7 @@ export default function ShoppingCart( props ) {
   const [ currentPage , setCurrentPage ] = useState(1);
  
   const loadProductsCart = ()=>{
-        return cart;
+        return cart.cart;
   }
 
   const handlePage = (event, value)=>{
@@ -22,7 +22,7 @@ export default function ShoppingCart( props ) {
 
   useEffect(()=>{
     setItemsShopping( loadProductsCart() )
-  },[ itemsShopping ])
+  },[ itemsShopping , cart ])
 
   return (
     

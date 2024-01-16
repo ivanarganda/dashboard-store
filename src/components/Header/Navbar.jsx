@@ -6,7 +6,7 @@ import { useDate } from './../../Hooks/estate/useDate';
 
 export default function Navbar( props ) {
 
-  let { handleFilter , filter } = props;
+  let { initialState , handleFilter } = props;
 
   const [ currentDate ] = useDate();
 
@@ -21,18 +21,17 @@ export default function Navbar( props ) {
             <p className='text-gray-400'>{currentDate}</p> 
           </article>
           <article className='lg:col-span-3 sm:w-1/2 md:w-2/3 m-auto lg:w-full w-2/3 relative'>
-            <SearchForm />
+            <SearchForm initialState={initialState} handleFilter={handleFilter} />
           </article>
           <nav className='hidden sm:w-2/3 sm:gap-6 sm:mx-auto sm:justify-center sm:flex md:col-span-7 md:w-2/3 relative m-auto mt-10 text-gray-300 md:flex md:items-center md:justify-between md:content-center px-10 
               after:border-b after:absolute after:bg-white-400 after:w-full after:bottom-0 after:border-b-gray-500'>
             {
               navbarCategories[0]?.map(( item , idx )=>{
                   let style = 'hover:text-[#ec7c6a]';
-                  if ( filter == '') { filter = 'Laptops' }
-                  if( filter != '' && filter == item.item ){
+                  if( initialState.category != '' && initialState.category == item.item ){
                     style = 'text-[#ec7c6a]';
                   }
-                  return <span key={idx} onClick={()=>handleFilter(item.item)} className={`${ style } font-bold cursor-pointer transition-all`}>{item.item}</span>
+                  return <span key={idx} onClick={()=>handleFilter('category' , item.item)} className={`${ style } font-bold cursor-pointer transition-all`}>{item.item}</span>
               })
             }            
           </nav>

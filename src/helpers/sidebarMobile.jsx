@@ -14,13 +14,13 @@ export const sidebarMobile = [
         "item":"ShoppingCart",
         "icon":<ShoppingCart sx={{fontSize:30}}/>
     },
-    {
-        "item":"Favorites",
-        "icon":<FavoriteIcon sx={{fontSize:30}}/>
-    },
-    {
-        "item":"Notifications",
-        "icon":<NotificationsIcon sx={{fontSize:30}}/>
-    },
+    // {
+    //     "item":"Favorites",
+    //     "icon":<FavoriteIcon sx={{fontSize:30}}/>
+    // },
+    // {
+    //     "item":"Notifications",
+    //     "icon":<NotificationsIcon sx={{fontSize:30}}/>
+    // },
 
 ]

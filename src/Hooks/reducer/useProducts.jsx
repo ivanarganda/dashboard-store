@@ -1,10 +1,29 @@
-import { useEffect , useState } from 'react';
-import { products } from './../../helpers/products';
-
 export const initialState = {
   favorites: [],
   cart: JSON.parse(localStorage.getItem('cart')) || [],
   totalPriceCart: 0,
+  q:'',
+  category:'',
+  name:'',
+  price:0,
+  espeficications:[
+    {
+      'processor':'',
+      'ram':'',
+      'storage':'',
+      'display':'',
+      'operating_system':'',
+      'resolution': '',
+      'iso_range': '',
+      'focus_points': '',
+      'video_resolution': '',
+      'keyboard_type': '',
+      'key_switches': '',
+      'backlighting': '',
+      'connectivity': '',
+      'price': 0
+    }
+  ]
 };
 
 export const reducer = (state, action) => {
@@ -66,18 +85,16 @@ export const reducer = (state, action) => {
           ...state,
           favorites: state.favorites.filter((item)=> item.id !== action.payload.id ),
         };
+    }
+
+    // Filters
+    if (action.type === 'search'){ 
+      return {
+        ...state,
+        q: action.payload
       }
+    }
 
     return state;
 
 };
-  
-
-
-export const useProducts = ()=>{
-
-  return products;
- 
-}
-
-
