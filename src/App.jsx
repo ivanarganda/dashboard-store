@@ -15,6 +15,7 @@ import axios from 'axios';
 import elasticlunr from 'elasticlunr';
 
 function App() {
+
   const [showMenu, setShowMenu] = useState(false);
   const [typeMenu, setTypeMenu] = useState('');
   const [type, setType] = useState('');
@@ -45,11 +46,15 @@ function App() {
   function performSearch(query, index) {
     if (index && query.trim() !== '') {
       const filtered = products.filter((product) => { 
+       
         return (
+          (
           (product.category && product.category.includes(query)) ||
           (product.name && product.name.includes(query)) ||
           (product.specifications && product.specifications.processor && product.specifications.processor.includes(query)) ||
           (product.id && product.id.toString().includes(query))
+          ) ||
+          (product.category !== '' && state.category == product.category)
         );
       });
       setFilteredProducts(filtered);
@@ -59,7 +64,7 @@ function App() {
   }
   
   useEffect(() => {
-    axios.get(`https://ws-dashboard-store.onrender.com/api/products`).then((response) => {
+    axios.get(`https://ws-dashboard-store.onrender.com/api/products_dev`).then((response) => {
       setProducts(response.data);
       setLoading(false);
 
@@ -106,6 +111,11 @@ function App() {
     dispatch({ type: 'DELETE_FAVORITE_PRODUCT', payload: { products, id } })
   }
 
+  const deleteFromCart = (id) => {
+    console.log( id );
+    dispatch({ type: 'DELETE_FROM_CART', payload: { products, id } })
+  }
+
   const goToHome = () => {
     setTypeMenu('')
     setType('');
@@ -113,6 +123,7 @@ function App() {
   }
 
   const handleFilter = (type, filter) => {
+    console.log( type , filter );
     dispatch({ type: type, payload: filter })
   }
 
@@ -129,7 +140,7 @@ function App() {
 
   const openMenu = (type) => {
     let menus = {
-      'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state} handleChangeQuantity={handleChangeQuantity} />,
+      'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart}/>,
       'Favorites': <Favorites styles={styles.sections} />,
       'Notifications': <Notifications styles={styles.sections} />
     }

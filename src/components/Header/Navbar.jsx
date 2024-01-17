@@ -28,7 +28,7 @@ export default function Navbar( props ) {
             {
               navbarCategories[0]?.map(( item , idx )=>{
                   let style = 'hover:text-[#ec7c6a]';
-                  if( initialState.category != '' && initialState.category == item.item ){
+                  if( initialState.q != '' && initialState.q == item.item ){
                     style = 'text-[#ec7c6a]';
                   }
                   return <span key={idx} onClick={()=>handleFilter('category' , item.item)} className={`${ style } font-bold cursor-pointer transition-all`}>{item.item}</span>

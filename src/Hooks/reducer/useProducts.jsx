@@ -3,27 +3,7 @@ export const initialState = {
   cart: JSON.parse(localStorage.getItem('cart')) || [],
   totalPriceCart: 0,
   q:'',
-  category:'',
-  name:'',
-  price:0,
-  espeficications:[
-    {
-      'processor':'',
-      'ram':'',
-      'storage':'',
-      'display':'',
-      'operating_system':'',
-      'resolution': '',
-      'iso_range': '',
-      'focus_points': '',
-      'video_resolution': '',
-      'keyboard_type': '',
-      'key_switches': '',
-      'backlighting': '',
-      'connectivity': '',
-      'price': 0
-    }
-  ]
+  category:''
 };
 
 export const reducer = (state, action) => {
@@ -87,8 +67,15 @@ export const reducer = (state, action) => {
         };
     }
 
+    if (action.type === 'DELETE_FROM_CART') {
+      return {
+        ...state,
+        cart: state.cart.filter((item)=> item.id !== action.payload.id ),
+      };
+  }
+
     // Filters
-    if (action.type === 'search'){ 
+    if (action.type === 'search' || action.type === 'category' ){ 
       return {
         ...state,
         q: action.payload

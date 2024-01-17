@@ -8,7 +8,7 @@ export default function SidebarPC( props ) {
   const { initialState , typeMenu , functions } = props;
 
   return (
-    <nav className={`bg-[#1F1D2B] rounded-tr-xl rounded-br-xl transition-all fixed lg:left-0 -left-full top-0 flex flex-col justify-between fixed top-0 h-full w-28 z-50`}>
+    <nav className={`bg-[#1F1D2B] rounded-tr-xl rounded-br-xl transition-all fixed lg:left-0 -left-full top-0 flex flex-col justify-around fixed top-0 h-full w-28 z-50`}>
         <main>
             <h1 className={`text-[#E5E3E3] text-3xl uppercase font-bold text-center mt-5`}>Tech</h1>
         </main>
