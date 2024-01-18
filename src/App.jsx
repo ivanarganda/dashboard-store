@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer , useCallback } from "react";
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from "./components/Header/Header";
 import Section from "./components/Sections/Section";
@@ -12,7 +12,7 @@ import useLanguage from "./Hooks/estate/useLanguage";
 
 import { reducer, initialState } from './Hooks/reducer/useProducts';
 import axios from 'axios';
-import elasticlunr from 'elasticlunr';
+import { useIndexSearch } from "./Hooks/estate/useIndexSearch";
 
 function App() {
 
@@ -24,55 +24,40 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchIndex, setSearchIndex] = useState(null);
-
-  // Function to build the search index
-  function buildSearchIndex(data) {
-    const index = elasticlunr(function () {
-      this.addField('name');
-      this.addField('specifications.processor');
-      this.addField('category');
-      this.setRef('id');
-
-      data.forEach((product) => {
-        this.addDoc(product);
-      });
-    });
-
-    return index;
-  }
-
-  // Function to perform a search and update filteredProducts
-  function performSearch(query, index) {
-    if (index && query.trim() !== '') {
-      const filtered = products.filter((product) => { 
-       
-        return (
-          (
-          (product.category && product.category.includes(query)) ||
-          (product.name && product.name.includes(query)) ||
-          (product.specifications && product.specifications.processor && product.specifications.processor.includes(query)) ||
-          (product.id && product.id.toString().includes(query))
-          ) ||
-          (product.category !== '' && state.category == product.category)
-        );
-      });
-      setFilteredProducts(filtered);
-    } else {
-      setFilteredProducts(products); // Show all products when search is empty
-    }
-  }
+  const index = useCallback(()=> useIndexSearch( products ) , [products]);
   
   useEffect(() => {
     axios.get(`https://ws-dashboard-store.onrender.com/api/products_dev`).then((response) => {
       setProducts(response.data);
       setLoading(false);
-
-      // Build the search index
-      const index = buildSearchIndex(response.data);
-      setSearchIndex(index);
     });
   }, []);
+
+  // Function to perform a search and update filteredProducts
+  function performSearch(query, index) {
+    if (index && query.trim() !== '') {
+        const filtered = products.filter((product) => { 
+        
+        return (
+            (
+            (product.category && product.category.includes(query)) ||
+            (product.name && product.name.includes(query)) ||
+            (product.specifications && product.specifications.processor && product.specifications.processor.includes(query)) ||
+            (product.id && product.id.toString().includes(query))
+            ) ||
+            (product.category !== '' && state.category == product.category)
+        );
+        });
+        setFilteredProducts(filtered);
+    } else {
+        setFilteredProducts(products); // Show all products when search is empty
+    }
+  }
+
+  useEffect(() => {
+    // Perform search whenever state.q changes
+    performSearch(state.q, index);
+  }, [state.q,index]);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -82,11 +67,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(state.cart)) || [];
   }, [state]);
-
-  useEffect(() => {
-    // Perform search whenever state.q changes
-    performSearch(state.q, searchIndex);
-  }, [state.q,searchIndex]);
 
   const recoveryCart = (cart) => {
     dispatch({ type: 'RECOVERY_CART', payload: cart });
@@ -112,7 +92,6 @@ function App() {
   }
 
   const deleteFromCart = (id) => {
-    console.log( id );
     dispatch({ type: 'DELETE_FROM_CART', payload: { products, id } })
   }
 
@@ -123,7 +102,6 @@ function App() {
   }
 
   const handleFilter = (type, filter) => {
-    console.log( type , filter );
     dispatch({ type: type, payload: filter })
   }
 
