@@ -3,9 +3,9 @@ import { useSidebar } from '../../Hooks/estate/useSidebar';
 
 export default function SidebarPC( props ) {
 
-  const [ itemsTop ] = useSidebar('top');
+  const { session , initialState , typeMenu , functions } = props;
 
-  const { initialState , typeMenu , functions } = props;
+  const [ itemsTop ] = useSidebar('top' , session );
 
   return (
     <nav className={`bg-[#1F1D2B] rounded-tr-xl rounded-br-xl transition-all fixed lg:left-0 -left-full top-0 flex flex-col justify-around fixed top-0 h-full w-28 z-50`}>

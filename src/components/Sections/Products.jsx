@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import {connect} from 'react-redux';
 
+const Products = (props) => {
 
-export const Products = (props) => {
-
-  let { loading , initialState , products , addToCart , addToFavorites , deleteFromFavorites , format } = props;
+  let { session , loading , initialState , products , addToCart , addToFavorites , deleteFromFavorites , format } = props;
 
   return (
     <section className='mt-20 pt-20 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
@@ -23,12 +23,15 @@ export const Products = (props) => {
                 </div>
                 <div className='flex flex-row justify-around w-full mt-10'>
                      <button className='bg-[#262837] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => addToCart(p.id)}>Add to cart</button>
+
+                  
                   {
-                    initialState.favorites.find((index)=>index.id === p.id ) ? 
+                   session.length !== 0 && ( 
+                   initialState.favorites.find((index)=>index.id === p.id ) ? 
                       <button className='bg-[#ec7c6a] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => { deleteFromFavorites(p.id); }}>Delete from favorites</button> 
                       : 
                       <button className='bg-[#262837] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => { addToFavorites(p.id); }}>Add to favorites</button>
-                  }
+                    )}
                 </div>
               </figcaption>
             </figure>
@@ -38,3 +41,11 @@ export const Products = (props) => {
     </section>
   );
 };
+
+const mapStateToProps = ( estate )=>{
+  return {
+    session:estate.session
+  }
+}
+
+export default connect( mapStateToProps )(Products);

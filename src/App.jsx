@@ -1,21 +1,20 @@
-import React, { useState, useEffect, useReducer , useCallback } from "react";
+import React, { useState, useEffect, useReducer, useCallback } from "react";
+import axios from 'axios';
+import { connect } from 'react-redux';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from "./components/Header/Header";
 import Section from "./components/Sections/Section";
-
-// Right sidebar
 import RightSidebar from './components/RightSidebar/RightSidebar';
 import ShoppingCart from './components/RightSidebar/ShoppingCart';
 import Favorites from './components/RightSidebar/Favorites';
-import Notifications from './components/RightSidebar/Notifications';
+import Settings from './components/RightSidebar/Settings';
+import Login from './components/Form/Login';
 import useLanguage from "./Hooks/estate/useLanguage";
-
 import { reducer, initialState } from './Hooks/reducer/useProducts';
-import axios from 'axios';
 import { useIndexSearch } from "./Hooks/estate/useIndexSearch";
 
-function App() {
 
+function App({ session, stateAuth, recoverySession }) {
   const [showMenu, setShowMenu] = useState(false);
   const [typeMenu, setTypeMenu] = useState('');
   const [type, setType] = useState('');
@@ -24,49 +23,51 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const index = useCallback(()=> useIndexSearch( products ) , [products]);
-  
+  const index = useCallback(() => useIndexSearch(products), [products]);
+
   useEffect(() => {
-    axios.get(`https://ws-dashboard-store.onrender.com/api/products_dev`).then((response) => {
-      setProducts(response.data);
-      setLoading(false);
-    });
+    axios.get(`https://ws-dashboard-store.onrender.com/api/products_dev`)
+      .then((response) => {
+        setProducts(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
-  // Function to perform a search and update filteredProducts
   function performSearch(query, index) {
     if (index && query.trim() !== '') {
-        const filtered = products.filter((product) => { 
-        
+      const filtered = products.filter((product) => {
         return (
-            (
-            (product.category && product.category.includes(query)) ||
-            (product.name && product.name.includes(query)) ||
-            (product.specifications && product.specifications.processor && product.specifications.processor.includes(query)) ||
-            (product.id && product.id.toString().includes(query))
-            ) ||
-            (product.category !== '' && state.category == product.category)
-        );
-        });
-        setFilteredProducts(filtered);
+          (product.category && product.category.includes(query)) ||
+          (product.name && product.name.includes(query)) ||
+          (product.specifications && product.specifications.processor && product.specifications.processor.includes(query)) ||
+          (product.id && product.id.toString().includes(query))
+        ) ||
+        (product.category !== '' && state.category == product.category);
+      });
+      setFilteredProducts(filtered);
     } else {
-        setFilteredProducts(products); // Show all products when search is empty
+      setFilteredProducts(products);
     }
   }
 
   useEffect(() => {
-    // Perform search whenever state.q changes
     performSearch(state.q, index);
-  }, [state.q,index]);
+  }, [state.q, index]);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const auth = JSON.parse(sessionStorage.getItem('auth')) || [];
     recoveryCart(savedCart);
-  }, [initialState]);
+    recoverySession(auth);
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state.cart)) || [];
-  }, [state]);
+    localStorage.setItem('cart', JSON.stringify(state.cart));
+    sessionStorage.setItem('auth', JSON.stringify(session));
+  }, [state, session]);
 
   const recoveryCart = (cart) => {
     dispatch({ type: 'RECOVERY_CART', payload: cart });
@@ -117,11 +118,16 @@ function App() {
   }
 
   const openMenu = (type) => {
-    let menus = {
-      'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart}/>,
-      'Favorites': <Favorites styles={styles.sections} />,
-      'Notifications': <Notifications styles={styles.sections} />
-    }
+    const menus = session.length !== 0
+      ? {
+        'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart} />,
+        'Favorites': <Favorites styles={styles.sections} />,
+        'Settings': <Settings styles={styles.sections} />
+      }
+      : {
+        'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart} />,
+        'LoginForm': <Login styles={styles.sections} />,
+      }
     setTypeMenu(menus[type])
     setShowMenu(true);
     setType(type);
@@ -133,14 +139,19 @@ function App() {
       <Section
         loading={loading}
         initialState={state}
-        products={filteredProducts} // Use filteredProducts instead of products
+        products={filteredProducts}
         addToCart={addToCart}
         addToFavorites={addToFavorites}
         deleteFromFavorites={deleteFromFavorites}
         format={{ currentLanguage }}
       />
       <Sidebar
-        initialState={[false, state.cart.length, state.favorites.length, false]}
+        initialState={
+          session.length !== 0 ?
+            [false, state.cart.length, state.favorites.length, false]
+            :
+            [false, state.cart.length, false, false]
+        }
         typeMenu={type}
         showMenu={showMenu}
         functions={[goToHome, openMenu, openMenu, openMenu]}
@@ -150,4 +161,19 @@ function App() {
   )
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    session: state.session,
+    stateAuth: state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    recoverySession: (data) => {
+      dispatch({ type: 'RECOVERY_SESSION', payload: data })
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

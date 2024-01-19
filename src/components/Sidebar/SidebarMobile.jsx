@@ -3,9 +3,10 @@ import { useSidebar } from '../../Hooks/estate/useSidebar';
 
 export default function SidebarMobile(props) {
 
-    const [ itemsMobile ] = useSidebar('mobile');
 
-    const { initialState , typeMenu , functions } = props;
+    const { session , initialState , typeMenu , functions } = props;
+
+    const [ itemsMobile ] = useSidebar('mobile' , session );
 
     return (
 

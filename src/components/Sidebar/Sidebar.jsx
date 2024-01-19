@@ -2,14 +2,24 @@ import React from 'react'
 import SidebarPC from './SidebarPC';
 import SidebarMobile from './SidebarMobile';
 
-export default function Sidebar(props) {
+import { connect } from 'react-redux';
+
+const Sidebar = (props)=> {
 
   return (
     <aside className=''>
-      <SidebarPC initialState={props.initialState} showMenu={props.showMenu} typeMenu={props.typeMenu} functions={props.functions}/> 
+      <SidebarPC session={props.session} initialState={props.initialState} showMenu={props.showMenu} typeMenu={props.typeMenu} functions={props.functions}/> 
           {/* Mobile menu */}
-      <SidebarMobile initialState={props.initialState} showMenu={props.showMenu} typeMenu={props.typeMenu} functions={props.functions} />
+      <SidebarMobile session={props.session} initialState={props.initialState} showMenu={props.showMenu} typeMenu={props.typeMenu} functions={props.functions} />
     </aside>
  
   )
 }
+
+const mapStateToProps = ( state )=>{
+  return {
+    session: state.session
+  }
+}
+
+export default connect(mapStateToProps)(Sidebar);
