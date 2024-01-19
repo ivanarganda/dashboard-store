@@ -1,10 +1,12 @@
-import React from 'react'
+import React , { useContext } from 'react'
 import { useSidebar } from '../../Hooks/estate/useSidebar';
+import { AuthContext } from "./../../Context/authContext";
 
 export default function SidebarMobile(props) {
 
+    const { initialState , typeMenu , functions } = props;
 
-    const { session , initialState , typeMenu , functions } = props;
+    const { session } = useContext( AuthContext );
 
     const [ itemsMobile ] = useSidebar('mobile' , session );
 
@@ -28,7 +30,6 @@ export default function SidebarMobile(props) {
             </ul>
         </nav>
 
-    )
-    
+    ) 
 
 } 

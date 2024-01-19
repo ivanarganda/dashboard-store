@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useReducer, useCallback } from "react";
+import React, { useState, useEffect, useReducer, useCallback , useContext } from "react";
 import axios from 'axios';
-import { connect } from 'react-redux';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from "./components/Header/Header";
 import Section from "./components/Sections/Section";
@@ -12,9 +11,10 @@ import Login from './components/Form/Login';
 import useLanguage from "./Hooks/estate/useLanguage";
 import { reducer, initialState } from './Hooks/reducer/useProducts';
 import { useIndexSearch } from "./Hooks/estate/useIndexSearch";
+import { AuthContext } from "./Context/authContext";
 
 
-function App({ session, stateAuth, recoverySession }) {
+function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [typeMenu, setTypeMenu] = useState('');
   const [type, setType] = useState('');
@@ -24,6 +24,7 @@ function App({ session, stateAuth, recoverySession }) {
   const [loading, setLoading] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const index = useCallback(() => useIndexSearch(products), [products]);
+  const { session , recoverySession } = useContext( AuthContext );
 
   useEffect(() => {
     axios.get(`https://ws-dashboard-store.onrender.com/api/products_dev`)
@@ -161,19 +162,4 @@ function App({ session, stateAuth, recoverySession }) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    session: state.session,
-    stateAuth: state
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    recoverySession: (data) => {
-      dispatch({ type: 'RECOVERY_SESSION', payload: data })
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

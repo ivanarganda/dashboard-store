@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect , useContext } from 'react';
+import { AuthContext } from "./../../Context/authContext";
 
 const Products = (props) => {
 
-  let { session , loading , initialState , products , addToCart , addToFavorites , deleteFromFavorites , format } = props;
+  let { loading , initialState , products , addToCart , addToFavorites , deleteFromFavorites , format } = props;
+  const { session } = useContext( AuthContext );
 
   return (
     <section className='mt-20 pt-20 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
@@ -42,10 +43,4 @@ const Products = (props) => {
   );
 };
 
-const mapStateToProps = ( estate )=>{
-  return {
-    session:estate.session
-  }
-}
-
-export default connect( mapStateToProps )(Products);
+export default Products;
