@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from '@mui/material/Pagination';
 import { especifications } from './../../helpers/specifications';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';

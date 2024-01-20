@@ -12,6 +12,8 @@ import useLanguage from "./Hooks/estate/useLanguage";
 import { reducer, initialState } from './Hooks/reducer/useProducts';
 import { useIndexSearch } from "./Hooks/estate/useIndexSearch";
 import { AuthContext } from "./Context/authContext";
+import { PaginationContext } from './Context/paginationContext.jsx'
+import Pagination_ from './components/Sections/Pagination';
 
 
 function App() {
@@ -25,11 +27,16 @@ function App() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const index = useCallback(() => useIndexSearch(products), [products]);
   const { session , recoverySession } = useContext( AuthContext );
+  const { pagination , setPagination } = useContext( PaginationContext );
 
   useEffect(() => {
     axios.get(`https://ws-dashboard-store.onrender.com/api/products_dev`)
       .then((response) => {
         setProducts(response.data);
+        setPagination({
+          ...pagination,
+          totalPages:Math.ceil(response.data.length / pagination.perPage)
+        })
         setLoading(false);
       })
       .catch((error) => {
@@ -48,15 +55,27 @@ function App() {
         ) ||
         (product.category !== '' && state.category == product.category);
       });
-      setFilteredProducts(filtered);
+
+      setPagination({
+        ...pagination,
+        totalPages:Math.ceil(filtered.length / pagination.perPage)
+      })
+
+      setFilteredProducts(filtered.slice((pagination.currentPage - 1) * pagination.perPage , ((pagination.currentPage - 1) * pagination.perPage) + pagination.perPage) );
     } else {
-      setFilteredProducts(products);
+
+      setPagination({
+        ...pagination,
+        totalPages:Math.ceil(products.length / pagination.perPage)
+      })
+
+      setFilteredProducts(products.slice((pagination.currentPage - 1) * pagination.perPage , ((pagination.currentPage - 1) * pagination.perPage) + pagination.perPage));
     }
   }
 
   useEffect(() => {
     performSearch(state.q, index);
-  }, [state.q, index]);
+  }, [state.q, index , pagination ]);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -136,28 +155,30 @@ function App() {
 
   return (
     <div className={`bg-[#262837] min-h-screen w-full`}>
-      <Header initialState={state} handleFilter={handleFilter} />
-      <Section
-        loading={loading}
-        initialState={state}
-        products={filteredProducts}
-        addToCart={addToCart}
-        addToFavorites={addToFavorites}
-        deleteFromFavorites={deleteFromFavorites}
-        format={{ currentLanguage }}
-      />
-      <Sidebar
-        initialState={
-          session.length !== 0 ?
-            [false, state.cart.length, state.favorites.length, false]
-            :
-            [false, state.cart.length, false, false]
-        }
-        typeMenu={type}
-        showMenu={showMenu}
-        functions={[goToHome, openMenu, openMenu, openMenu]}
-      />
-      <RightSidebar styles={styles.aside} typeMenu={typeMenu} type={type} closeMenu={closeMenu} />
+      
+        <Header initialState={state} handleFilter={handleFilter} />
+        <Section
+          loading={loading}
+          initialState={state}
+          products={filteredProducts}
+          addToCart={addToCart}
+          addToFavorites={addToFavorites}
+          deleteFromFavorites={deleteFromFavorites}
+          format={{ currentLanguage }}
+        />
+        <Pagination_ />
+        <Sidebar
+          initialState={
+            session.length !== 0 ?
+              [false, state.cart.length, state.favorites.length, false]
+              :
+              [false, state.cart.length, false, false]
+          }
+          typeMenu={type}
+          showMenu={showMenu}
+          functions={[goToHome, openMenu, openMenu, openMenu]}
+        />
+        <RightSidebar styles={styles.aside} typeMenu={typeMenu} type={type} closeMenu={closeMenu} />
     </div>
   )
 }
