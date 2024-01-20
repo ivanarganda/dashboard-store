@@ -74,8 +74,8 @@ function App() {
     dispatch({ type: 'RECOVERY_CART', payload: cart });
   }
 
-  const handleChangeQuantity = (id, event) => {
-    let newQuantity = event.value;
+  const handleChangeQuantity = (id, currentQuantity) => {
+    let newQuantity = currentQuantity;
     if (newQuantity !== '') {
       dispatch({ type: 'ADD_QUANTITY_PRODUCT_CART', payload: { newQuantity, id } });
     }

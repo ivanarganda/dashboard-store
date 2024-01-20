@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useRef } from 'react';
 import Pagination from '@mui/material/Pagination';
 import { especifications } from './../../helpers/specifications';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
@@ -6,7 +6,7 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 export default function ShoppingCart(props) {
   const { styles, cart, handleChangeQuantity, deleteFromCart } = props;
-
+  const [ currentQuantity , setCurrentQuantity ] = useState(0);
   const [itemsShopping, setItemsShopping] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -20,7 +20,7 @@ export default function ShoppingCart(props) {
 
   useEffect(() => {
     setItemsShopping(loadProductsCart());
-  }, [cart]); // Removed 'itemsShopping' and 'deleteFromCart' from dependencies
+  }, [cart,currentQuantity]); // Removed 'itemsShopping' and 'deleteFromCart' from dependencies
 
   const handleDeleteFromCart = (itemId) => {
     deleteFromCart(itemId);
@@ -33,7 +33,7 @@ export default function ShoppingCart(props) {
         .slice((currentPage - 1) * 3, (currentPage - 1) * 3 + 3)
         .map((item) => {
           return (
-            <div key={item.id} className='flex flex-col justify-start m-auto items-center w-full md:w-full h-full md:flex md:flex-row md:justify-around md:m-auto'>
+            <div key={item.id} className='flex flex-col justify-center md:items-center w- md:w-full h-full md:flex md:flex-row md:justify-around md:m-auto'>
               <div className='w-40 relative'>
                 <img className='w-20 h-20 sm:w-30 sm:h-30  rounded-full' src={item.url} alt='image' />
                 <span
@@ -59,14 +59,46 @@ export default function ShoppingCart(props) {
                   </span>
                 </label>
               </form>
-              <span className='w-50'>
+              <span className='w-50 flex flex-col justify-center'>
                 <b>Quantity:</b>
+                <div className='w-full flex flex-row '>
+                <button
+                  className='text-black font-bold outline-none bg-white w-10 border hover:bg-gray-300 transition-all'
+                  onClick={(event) => {
+                    event.preventDefault();
+
+                    if ( parseInt($('#inputQuantity' + item.id).val()) < 2 ){
+                      handleDeleteFromCart( item.id );
+                      return;
+                    }
+
+                    let updatedQuantity = parseInt($('#inputQuantity' + item.id).val()) - 1;
+                    handleChangeQuantity(item.id, updatedQuantity);
+                    $('#inputQuantity' + item.id).val( updatedQuantity );
+                  }}
+                >
+                  -
+                </button>
                 <input
                   type='text'
-                  className='text-black font-bold w-6 outline-none'
+                  className='text-black font-bold w-6 outline-none w-8 border pl-2'
                   defaultValue={item.quantity}
-                  onChange={() => handleChangeQuantity(item.id, event.target)}
+                  onChange={(event) => handleChangeQuantity(item.id, event.target.value)}
+                  id={'inputQuantity' + item.id}
                 />
+                <button
+                  className='text-black font-bold outline-none bg-white w-10 border hover:bg-gray-300 transition-all'
+                  onClick={(event) => {
+                    event.preventDefault();
+                    let updatedQuantity = parseInt($('#inputQuantity' + item.id).val()) + 1;
+                    handleChangeQuantity(item.id, updatedQuantity);
+                    $('#inputQuantity' + item.id).val( updatedQuantity );
+                  }}
+                >
+                  +
+                </button>
+                </div>
+                
               </span>
               <div>${item.specifications.price}</div>
             </div>
