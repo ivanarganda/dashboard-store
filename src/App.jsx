@@ -8,12 +8,15 @@ import ShoppingCart from './components/RightSidebar/ShoppingCart';
 import Favorites from './components/RightSidebar/Favorites';
 import Settings from './components/RightSidebar/Settings';
 import Login from './components/Form/Login';
+import Footer from './components/Footer/Footer';
+
 import useLanguage from "./Hooks/estate/useLanguage";
 import { reducer, initialState } from './Hooks/reducer/useProducts';
 import { useIndexSearch } from "./Hooks/estate/useIndexSearch";
 import { AuthContext } from "./Context/authContext";
 import { PaginationContext } from './Context/paginationContext.jsx'
 import Pagination_ from './components/Sections/Pagination';
+
 
 
 function App() {
@@ -44,7 +47,7 @@ function App() {
       });
   }, []);
 
-  function performSearch(query, index) {
+  const performSearch = useCallback((query, index) =>{
     if (index && query.trim() !== '') {
       const filtered = products.filter((product) => {
         return (
@@ -71,11 +74,11 @@ function App() {
 
       setFilteredProducts(products.slice((pagination.currentPage - 1) * pagination.perPage , ((pagination.currentPage - 1) * pagination.perPage) + pagination.perPage));
     }
-  }
+  },[ filteredProducts, products, pagination ]);
 
   useEffect(() => {
-    performSearch(state.q, index);
-  }, [state.q, index , pagination ]);
+    performSearch(state.q, index, pagination);
+  }, [state.q, index , pagination.currentPage ]); 
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -167,6 +170,7 @@ function App() {
           format={{ currentLanguage }}
         />
         <Pagination_ />
+        <Footer />
         <Sidebar
           initialState={
             session.length !== 0 ?

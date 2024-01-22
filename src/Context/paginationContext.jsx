@@ -6,7 +6,7 @@ const PaginationProvider = ({children}) => {
 
     const [ pagination , setPagination ] = useState({
         currentPage:1,
-        perPage:5,
+        perPage:10,
         totalPages:0
     });
 

@@ -27,9 +27,9 @@ export default function Pagination_() {
             width: '50%',
             minWidth: '350px',
             margin: 'auto',
-            '@media (max-width: 400px)': {
-              width: '80%',
-              minWidth: '250px',
+            '@media (max-width: 390px)': {
+              width: '100%',
+              minWidth: '300px',
             },
           }}
           count={pagination.totalPages}
