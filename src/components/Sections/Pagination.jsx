@@ -2,7 +2,7 @@ import React,{ useContext } from 'react'
 import Pagination from '@mui/material/Pagination';
 import { PaginationContext } from './../../Context/paginationContext.jsx'
 
-export default function Pagination_() {
+function Pagination_() {
     
   const { pagination , setPagination } = useContext( PaginationContext );
 
@@ -38,3 +38,5 @@ export default function Pagination_() {
         />
   )
 }
+
+export default React.memo(Pagination_);

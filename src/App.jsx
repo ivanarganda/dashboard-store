@@ -16,7 +16,7 @@ import { useIndexSearch } from "./Hooks/estate/useIndexSearch";
 import { AuthContext } from "./Context/authContext";
 import { PaginationContext } from './Context/paginationContext.jsx'
 import Pagination_ from './components/Sections/Pagination';
-
+import Snackbar_ from './components/Snackbar/Snackbar';
 
 
 function App() {
@@ -183,6 +183,7 @@ function App() {
           functions={[goToHome, openMenu, openMenu, openMenu]}
         />
         <RightSidebar styles={styles.aside} typeMenu={typeMenu} type={type} closeMenu={closeMenu} />
+        <Snackbar_ sx={{ zIndex: '99' , position:'fixed' }}  />
     </div>
   )
 }

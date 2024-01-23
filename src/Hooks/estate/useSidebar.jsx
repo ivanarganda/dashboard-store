@@ -1,11 +1,13 @@
-import React,{ useCallback, useEffect, useState } from 'react'
+import React,{ useCallback, useEffect, useState , useContext } from 'react'
 import { sideBarTop } from '../../helpers/sideBarTop';
 import { sidebarBottom } from '../../helpers/SidebarBottom';
 import { sidebarMobile } from '../../helpers/sidebarMobile';
+import { AuthContext } from "./../../Context/authContext";
 
-export const useSidebar = ( position , session )=>{
+export const useSidebar = ( position )=>{
 
     const [ items , setItems ] = useState([]);
+    const { session } = useContext( AuthContext );
 
     const createSidebar = useCallback(()=>{
 
@@ -19,13 +21,13 @@ export const useSidebar = ( position , session )=>{
 
         items.map(( i )=>{ return i })
     
-    },[ items, session ])
+    },[ items ])
 
     useEffect(()=>{
 
         createSidebar();
         
-    },[])
+    },[ session ])
 
     return [ items ];
 

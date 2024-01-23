@@ -1,26 +1,31 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from './../../Context/authContext';
+import { MsgContext } from '../../Context/messageContext';
 
-export default function Login({ styles }) {
+function Login({ styles }) {
+
   const { setSession } = useContext(AuthContext);
+  const { writeMessage } = useContext( MsgContext ); 
 
-  const handleCallbackResponse = (response) => {
+  const handleCallbackResponse = async(response) => {
     const [headerEncoded, payloadEncoded, signature] = response.credential.split('.');
     // Decode the header and payload
     const header = JSON.parse(atob(headerEncoded));
     const payload = JSON.parse(atob(payloadEncoded));
-    const { email, name, sub } = payload;
+    const { email, name , sub } = payload;
 
-    axios.post('https://ws-api-tech.online/api/login/google', {
+    await axios.post('https://ws-api-tech.online/api/login/google', {
       'username': decodeURIComponent(escape(name)),
       'email': email,
       'google_id': sub
     }).then((response) => {
-      console.log(response.data);
       sessionStorage.setItem('auth', JSON.stringify(response.data));
       setSession(JSON.parse(sessionStorage.getItem('auth')));
-      window.location='';
+      writeMessage(`Loging as ${decodeURIComponent(escape(name))} .....`);
+      setTimeout(()=>{
+        window.location='';
+      },3000)
     });
   }
 
@@ -33,7 +38,7 @@ export default function Login({ styles }) {
 
     google.accounts.id.renderButton(
       document.getElementById('signInDiv'),
-      { theme: 'outline', size: 'large' }
+      { theme: 'filled', size: 'large' }
     );
 
   }, []);
@@ -45,3 +50,5 @@ export default function Login({ styles }) {
     </section>
   )
 }
+
+export default React.memo(Login);

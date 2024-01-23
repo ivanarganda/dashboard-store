@@ -1,12 +1,10 @@
-import React , { useContext } from 'react'
+import React , { useContext, useEffect } from 'react'
 import { useSidebar } from '../../Hooks/estate/useSidebar';
 import { AuthContext } from "./../../Context/authContext";
 
 export default function SidebarMobile(props) {
 
-    const { initialState , typeMenu , functions } = props;
-
-    const { session } = useContext( AuthContext );
+    const { initialState , session , typeMenu , functions } = props;
 
     const [ itemsMobile ] = useSidebar('mobile' , session );
 

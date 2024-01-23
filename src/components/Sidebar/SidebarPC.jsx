@@ -4,9 +4,7 @@ import { AuthContext } from "./../../Context/authContext";
 
 export default function SidebarPC( props ) {
 
-  const { initialState , typeMenu , functions } = props;
-
-  const { session } = useContext( AuthContext );
+  const { initialState , session , typeMenu , functions } = props;
 
   const [ itemsTop ] = useSidebar('top' , session );
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import SidebarPC from './SidebarPC';
 import SidebarMobile from './SidebarMobile';
 
@@ -14,4 +14,4 @@ const Sidebar = (props)=> {
   )
 }
 
-export default Sidebar;
+export default React.memo(Sidebar);

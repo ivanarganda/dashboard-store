@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import moment from 'moment';
 
-export const useDate = ( date = '')=>{
+export const useDate = (date = '') => {
+  const [formattedDate, setFormattedDate] = useState('');
+  const now = moment();
 
-    const [ formatedDate , setFormatedDate ] = useState(''); 
-    const now = moment();
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setFormattedDate(currentDate());
+    }, 500);
 
-    useEffect(()=>{
-        setFormatedDate( date );
-    },[ formatedDate ])
-    
-    const currentDate = ()=>{
-         return now.format('dddd, DD MMM YYYY HH:mm:ss');
-    }
+    return () => clearInterval(intervalId); // Clean up the interval when the component unmounts
+  }, []);
 
-    const formatDate = ()=>{
-        return moment( formatedDate , 'dd-mm-YYYY' );
-    }
+  const currentDate = () => {
+    return now.format('dddd, DD MMM YYYY HH:mm:ss');
+  };
 
-    return [ currentDate() , formatDate() ]; 
+  const formatDate = () => {
+    return moment(formattedDate, 'dddd, DD MMM YYYY HH:mm:ss').format('DD-MM-YYYY');
+  };
 
-}
+  return [currentDate(), formatDate()];
+};

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './Navbar';
 import { initialState } from '../../Hooks/reducer/useProducts';
 
-export default function Header( props ) {  
+function Header( props ) {  
 
   return (
     <header>
@@ -10,3 +10,5 @@ export default function Header( props ) {
     </header>
   )
 }
+
+export default React.memo(Header);

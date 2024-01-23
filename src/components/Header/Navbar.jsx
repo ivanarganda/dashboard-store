@@ -1,18 +1,13 @@
-import React,{ useContext } from 'react'
+import React,{ useCallback, useContext } from 'react'
 import SearchForm from './SearchForm';
 import './Header.css';
 import useNavbar from './../../Hooks/estate/useNavbar';
 import { useDate } from './../../Hooks/estate/useDate';
 
-import { AuthContext } from './../../Context/authContext';
-
 export default function Navbar( props ) {
 
   let { initialState , handleFilter } = props;
-
   const [ currentDate ] = useDate();
-
-  const { session } = useContext( AuthContext );
 
   const navbarCategories = useNavbar('categories');
 
