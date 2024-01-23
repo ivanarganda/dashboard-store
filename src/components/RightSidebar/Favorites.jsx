@@ -5,7 +5,7 @@ export default function Favorites( props ) {
   const { styles } = props; 
 
   return (
-    <section>
+    <section className={styles}>
       Favorites
     </section>
   )

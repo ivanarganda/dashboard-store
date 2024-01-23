@@ -5,7 +5,7 @@ export default function Settings( props ) {
   const { styles } = props;
   
   return (
-    <section>
+    <section className={styles}>
       Settings
     </section>
   )

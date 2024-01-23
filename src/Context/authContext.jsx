@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState } from 'react';
 
 const AuthContext = React.createContext();
 
@@ -11,7 +11,7 @@ const AuthProvider = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{session, recoverySession }}>
+        <AuthContext.Provider value={{session , setSession , recoverySession }}>
             {children}
         </AuthContext.Provider>
     )
