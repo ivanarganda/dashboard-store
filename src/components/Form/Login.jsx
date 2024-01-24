@@ -2,11 +2,14 @@ import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from './../../Context/authContext';
 import { MsgContext } from '../../Context/messageContext';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Login({ styles }) {
 
-  const { setSession } = useContext(AuthContext);
-  const { writeMessage } = useContext( MsgContext ); 
+  const { setSession , setHasPassword } = useContext(AuthContext);
+  const { writeMessage , setColor , positions , setPositions , setTime } = useContext( MsgContext ); 
+  const [ logged , setLogged ] = useState( false ); 
 
   const handleCallbackResponse = async(response) => {
     const [headerEncoded, payloadEncoded, signature] = response.credential.split('.');
@@ -15,18 +18,43 @@ function Login({ styles }) {
     const payload = JSON.parse(atob(payloadEncoded));
     const { email, name , sub } = payload;
 
-    await axios.post('https://ws-api-tech.online/api/login/google', {
-      'username': decodeURIComponent(escape(name)),
-      'email': email,
-      'google_id': sub
-    }).then((response) => {
-      sessionStorage.setItem('auth', JSON.stringify(response.data));
-      setSession(JSON.parse(sessionStorage.getItem('auth')));
-      writeMessage(`Loging as ${decodeURIComponent(escape(name))} .....`);
-      setTimeout(()=>{
-        window.location='';
-      },3000)
-    });
+    writeMessage(`Logging .....`);
+    setColor('success');
+
+    try {
+
+      await axios.post('https://ws-api-tech.online/api/login/google', {
+        'username': decodeURIComponent(escape(name)),
+        'email': email,
+        'google_id': sub
+      }).then((response) => {
+
+        const { password } = response.data.data.user
+        sessionStorage.setItem('auth', JSON.stringify(response.data));
+        setSession(JSON.parse(sessionStorage.getItem('auth')));
+        writeMessage(`Logged as ${decodeURIComponent(escape(name))} ... redirecting...`);
+        setPositions({
+          ...positions,
+          vertical:'bottom',
+          horizontal:'left'
+        })
+        setTime(2000);
+        setColor('success');
+        sessionStorage.setItem('auth_pass', JSON.stringify({"password":password}) );
+        setHasPassword( JSON.parse(sessionStorage.getItem('auth_pass')) );
+        setLogged( true );
+        setTimeout(()=>{
+          window.location='';
+        },3000)
+
+      });
+
+    } catch ( error ){
+
+        writeMessage(`${error} Incurred an error on loging...contact with developer`);
+        setColor('error');
+
+    }
   }
 
   useEffect(() => {
@@ -47,6 +75,15 @@ function Login({ styles }) {
     <section className={`${styles}`}>
       <div id='signInDiv'>
       </div>
+      {
+        logged && <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+        >
+        <CircularProgress color="inherit" />
+        </Backdrop>
+      }
+      
     </section>
   )
 }

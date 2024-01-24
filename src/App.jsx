@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useCallback , useContext } from "react";
+import React, { useState, useEffect, useReducer, useCallback , useMemo , useContext } from "react";
 import axios from 'axios';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from "./components/Header/Header";
@@ -17,6 +17,7 @@ import { AuthContext } from "./Context/authContext";
 import { PaginationContext } from './Context/paginationContext.jsx'
 import Pagination_ from './components/Sections/Pagination';
 import Snackbar_ from './components/Snackbar/Snackbar';
+import { MsgContext } from "./Context/messageContext.jsx";
 
 
 function App() {
@@ -29,14 +30,43 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const index = useCallback(() => useIndexSearch(products), [products]);
-  const { session , recoverySession } = useContext( AuthContext );
+  const { session , recoverySession , hasPassword } = useContext( AuthContext );
   const { pagination , setPagination } = useContext( PaginationContext );
+  const { writeMessage , setColor , positions , setPositions , setTime } = useContext( MsgContext );
 
-  useEffect(() => {
+  useEffect(()=>{
+    if ( hasPassword.password === false ){
+      writeMessage(`By security, adviced to have a password`);
+      setPositions({
+        ...positions,
+        vertical:'top',
+        horizontal:'center'
+      })
+      setTime( 5000 );
+      setColor('warning');
+    }
+  },[])
+
+  // Retrieve favorites user
+  const fetchData = async( id )=>{
+      if ( state.favorites.length === 0 ){
+         axios.get('https://ws-api-tech.online/api/products/' + id).then(( response )=>{
+            let products = response.data.data[0].products;
+            let newProducts = products.map(( p )=>{
+              return p.product;
+            })
+            // recoveryFavorites( newProducts );
+         })       
+      }
+  }
+
+  const retrieveFavorites = useCallback(() => fetchData( session.data.user.id ) ,[ state.favorites ]) 
+
+  useEffect(() => { 
     axios.get(`https://ws-dashboard-store.onrender.com/api/products_dev`)
       .then((response) => {
         setProducts(response.data);
-        setPagination({
+        setPagination({ 
           ...pagination,
           totalPages:Math.ceil(response.data.length / pagination.perPage)
         })
@@ -90,10 +120,21 @@ function App() {
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(state.cart));
     sessionStorage.setItem('auth', JSON.stringify(session));
-  }, [state, session]);
+    
+    if ( session.length !== 0 ){
+      sessionStorage.setItem('auth_pass', JSON.stringify({'password':session.data.user.password}));
+      sessionStorage.setItem('favorites', JSON.stringify(state.favorites));
+      retrieveFavorites(); 
+    } 
+     
+  }, [state.cart, session , retrieveFavorites ]);
 
   const recoveryCart = (cart) => {
     dispatch({ type: 'RECOVERY_CART', payload: cart });
+  }
+
+  const recoveryFavorites = (favorites) =>{
+    dispatch({ type:'RECOVERY_FAVORITES' , payload:favorites})
   }
 
   const handleChangeQuantity = (id, currentQuantity) => {
@@ -107,12 +148,25 @@ function App() {
     dispatch({ type: 'ADD_PRODUCT_CART', payload: { products, id } });
   }
 
-  const addToFavorites = (id) => {
+  const addToFavorites = (id , product ) => {
+    
     dispatch({ type: 'ADD_FAVORITE_PRODUCT', payload: { products, id } })
+    axios.post('https://ws-api-tech.online/api/products/create' , {
+      id:id,
+      product:JSON.stringify(product),
+      user_id:session.data.user.id
+    } ).then((response)=>{
+      console.log( response.data );
+    })
+  
   }
 
   const deleteFromFavorites = (id) => {
+    console.log( id );
     dispatch({ type: 'DELETE_FAVORITE_PRODUCT', payload: { products, id } })
+    axios.delete(`https://ws-api-tech.online/api/products/delete/${id}/${session.data.user.id}`).then((response)=>{
+      console.log( response );
+    })
   }
 
   const deleteFromCart = (id) => {
@@ -158,7 +212,6 @@ function App() {
 
   return (
     <div className={`bg-[#262837] min-h-screen w-full`}>
-      
         <Header initialState={state} handleFilter={handleFilter} />
         <Section
           loading={loading}
@@ -174,7 +227,7 @@ function App() {
         <Sidebar
           initialState={
             session.length !== 0 ?
-              [false, state.cart.length, state.favorites.length, false]
+              [false, state.cart.length, false , false]
               :
               [false, state.cart.length, false, false]
           }

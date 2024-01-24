@@ -8,7 +8,7 @@ import { MsgContext } from '../../Context/messageContext';
 
 export default function Snackbar_() {
 
-    const { msg, opened, handleClose } = useContext(MsgContext);
+    const { color , msg, opened, handleClose , positions , time } = useContext(MsgContext);
 
     const action = (
         <React.Fragment>
@@ -29,14 +29,15 @@ export default function Snackbar_() {
     return (
         <div>
             <Snackbar
+                anchorOrigin={{vertical:positions.vertical , horizontal:positions.horizontal}}
                 open={opened}
-                autoHideDuration={3000}
+                autoHideDuration={time}
                 onClose={() => handleClose(event)}
                 action={action}
             >
                 <Alert
                     onClose={handleClose}
-                    severity="success"
+                    severity={color}
                     variant="filled"
                     sx={{ width: '100%' }}
                 >

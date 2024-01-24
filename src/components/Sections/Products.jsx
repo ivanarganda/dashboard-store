@@ -28,10 +28,10 @@ const Products = (props) => {
                      <button className='bg-[#262837] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => addToCart(p.id)}>Add to cart</button>
                   {
                    session.length !== 0 && ( 
-                   initialState.favorites.find((index)=>index.id === p.id ) ? 
+                   initialState.favorites.find((index)=>index.id == p.id ) ? 
                       <button className='bg-[#ec7c6a] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => { deleteFromFavorites(p.id); }}>Delete from favorites</button> 
                       : 
-                      <button className='bg-[#262837] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => { addToFavorites(p.id); }}>Add to favorites</button>
+                      <button className='bg-[#262837] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => { addToFavorites(p.id , p); }}>Add to favorites</button>
                     )}
                 </div>
               </figcaption>
@@ -43,4 +43,4 @@ const Products = (props) => {
   );
 };
 
-export default React.memo(Products);
+export default Products;

@@ -14,4 +14,4 @@ const Sidebar = (props)=> {
   )
 }
 
-export default React.memo(Sidebar);
+export default Sidebar;

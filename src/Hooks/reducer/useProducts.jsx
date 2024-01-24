@@ -1,5 +1,5 @@
 export const initialState = {
-  favorites: [],
+  favorites: JSON.parse(sessionStorage.getItem('favorites')) || [],
   cart: JSON.parse(localStorage.getItem('cart')) || [],
   totalPriceCart: 0,
   q:'',
@@ -14,13 +14,20 @@ export const reducer = (state, action) => {
         cart: action.payload
       }
     } 
+
+    if ( action.type === 'RECOVERY_FAVORITES'){
+      return {
+        ...state,
+        favorites: action.payload
+      }
+    }
     
     if (action.type === 'ADD_PRODUCT_CART') {
       let newProduct = action.payload.products.find((product) => product.id === action.payload.id);
   
       if (state.cart.some((item) => item.id === action.payload.id)) {
         // If the product already exists in the cart, increment its quantity
-        return {
+        return { 
           ...state,
           cart: state.cart.map((item) =>
             item.id === action.payload.id
