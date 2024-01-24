@@ -43,9 +43,9 @@ function Login({ styles }) {
         sessionStorage.setItem('auth_pass', JSON.stringify({"password":password}) );
         setHasPassword( JSON.parse(sessionStorage.getItem('auth_pass')) );
         setLogged( true );
-        setTimeout(()=>{
-          window.location='';
-        },3000)
+        // setTimeout(()=>{
+        //   window.location='';
+        // },3000)
 
       });
 

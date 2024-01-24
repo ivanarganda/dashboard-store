@@ -47,21 +47,6 @@ function App() {
     }
   },[])
 
-  // Retrieve favorites user
-  const fetchData = async( id )=>{
-      if ( state.favorites.length === 0 ){
-         axios.get('https://ws-api-tech.online/api/products/' + id).then(( response )=>{
-            let products = response.data.data[0].products;
-            let newProducts = products.map(( p )=>{
-              return p.product;
-            })
-            // recoveryFavorites( newProducts );
-         })       
-      }
-  }
-
-  const retrieveFavorites = useCallback(() => fetchData( session.data.user.id ) ,[ state.favorites ]) 
-
   useEffect(() => { 
     axios.get(`https://ws-dashboard-store.onrender.com/api/products_dev`)
       .then((response) => {
@@ -73,7 +58,7 @@ function App() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error); 
       });
   }, []);
 
@@ -124,10 +109,9 @@ function App() {
     if ( session.length !== 0 ){
       sessionStorage.setItem('auth_pass', JSON.stringify({'password':session.data.user.password}));
       sessionStorage.setItem('favorites', JSON.stringify(state.favorites));
-      retrieveFavorites(); 
     } 
      
-  }, [state.cart, session , retrieveFavorites ]);
+  }, [state.cart, state.favorites , session ]);
 
   const recoveryCart = (cart) => {
     dispatch({ type: 'RECOVERY_CART', payload: cart });
