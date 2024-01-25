@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useContext } from 'react';
 import Pagination from '@mui/material/Pagination';
 import { especifications } from './../../helpers/specifications';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { ImagesProductsContext } from '../../Context/imagesProducts';
 
 export default function ShoppingCart(props) {
   const { styles, cart, handleChangeQuantity, deleteFromCart } = props;
   const [ currentQuantity , setCurrentQuantity ] = useState(0);
   const [itemsShopping, setItemsShopping] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { images } = useContext( ImagesProductsContext ); 
 
   const loadProductsCart = () => {
     return cart.cart;
@@ -35,7 +37,7 @@ export default function ShoppingCart(props) {
           return (
             <div key={item.id} className='flex flex-col justify-center md:items-center w- md:w-full h-full md:flex md:flex-row md:justify-around md:m-auto'>
               <div className='w-40 relative'>
-                <img className='w-20 h-20 sm:w-30 sm:h-30  rounded-full' src={item.url} alt='image' />
+                <img className='w-20 h-20 sm:w-30 sm:h-30  rounded-full' src={images[item.id]} alt={item.url} />
                 <span
                   onClick={() => {
                     handleDeleteFromCart(item.id);
@@ -100,7 +102,7 @@ export default function ShoppingCart(props) {
                 </div>
                 
               </span>
-              <div>${item.specifications.price}</div>
+              <div>€{item.specifications.price}</div>
             </div>
           );
         })}

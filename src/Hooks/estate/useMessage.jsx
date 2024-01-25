@@ -1,9 +1,6 @@
-import React , { useState } from 'react'
+import React , { useCallback, useEffect, useState } from 'react'
 
-const MsgContext = React.createContext();
-
-
-const MsgProvider = ({children})=>{
+export const useMessage = ( msg , time , color , vertical = false , horizontal = false )=>{
 
     const [ msg , setMsg ] = useState('');
     const [ opened , setOpenned ] = useState( false );
@@ -18,29 +15,24 @@ const MsgProvider = ({children})=>{
         setOpenned(false);
     }
 
-    const writeMessage = ( msg )=>{
-        
-    }
-
-    const useMessage = ( msg , color , time , vertical = false , horizontal = false )=>{
+    const setMessage = useCallback(()=>{
         setOpenned( true );
         setMsg( msg );
-        setColor( color );
         setTime( time );
-        if ( vertical && horizontal ){
+        setColor( color )
+        if ( !vertical || !horizontal ){
             setPositions({
                 ...positions,
                 vertical:vertical,
                 horizontal:horizontal
             })
         }
-    }
+    },[])
 
-    return (
-        <MsgContext.Provider value={{ color , msg , opened , positions , handleClose , useMessage }}>
-            {children}
-        </MsgContext.Provider>
-    )
+    // useEffect(()=>{
+    //     setMessage();
+    // },[])
+
+    return [ msg , color , positions , time , handleClose ];
+
 }
-
-export { MsgContext , MsgProvider }

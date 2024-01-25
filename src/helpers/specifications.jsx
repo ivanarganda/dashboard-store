@@ -8,7 +8,7 @@ export const especifications ={
         "operating_system",
         "price"
     ],
-    "cameras":[
+    "Cameras":[
         "resolution",
         "iso_range",
         "focus_points",

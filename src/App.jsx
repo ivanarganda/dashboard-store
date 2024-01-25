@@ -32,7 +32,7 @@ function App() {
   const index = useCallback(() => useIndexSearch(products), [products]);
   const { session , recoverySession , hasPassword } = useContext( AuthContext );
   const { pagination , setPagination } = useContext( PaginationContext );
-  const { writeMessage , setColor , positions , setPositions , setTime } = useContext( MsgContext );
+  const { useMessage , setColor , positions , setPositions , setTime } = useContext( MsgContext );
 
   useEffect(()=>{
     if ( hasPassword.password === false ){
@@ -129,7 +129,12 @@ function App() {
   }
 
   const addToCart = (id) => {
-    dispatch({ type: 'ADD_PRODUCT_CART', payload: { products, id } });
+    try {
+      dispatch({ type: 'ADD_PRODUCT_CART', payload: { products, id } });
+      useMessage( 'Added to cart' , 'success' , 2000 , 'top' , 'center' );
+    } catch ( error ){
+      useMessage(  `Upps!!...Could not be added to cart` , 'error' , 2000 , 'top' , 'center' );
+    }
   }
 
   const addToFavorites = (id , product ) => {
@@ -206,7 +211,10 @@ function App() {
           deleteFromFavorites={deleteFromFavorites}
           format={{ currentLanguage }}
         />
-        <Pagination_ />
+        {
+          filteredProducts.length !== 0  && <Pagination_ />
+        }
+        
         <Footer />
         <Sidebar
           initialState={

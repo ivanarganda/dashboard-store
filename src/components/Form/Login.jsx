@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 function Login({ styles }) {
 
   const { setSession , setHasPassword } = useContext(AuthContext);
-  const { writeMessage , setColor , positions , setPositions , setTime } = useContext( MsgContext ); 
+  const { useMessage } = useContext( MsgContext ); 
   const [ logged , setLogged ] = useState( false ); 
 
   const handleCallbackResponse = async(response) => {
@@ -18,8 +18,7 @@ function Login({ styles }) {
     const payload = JSON.parse(atob(payloadEncoded));
     const { email, name , sub } = payload;
 
-    writeMessage(`Logging .....`);
-    setColor('success');
+    useMessage( `Logging.....` , 'success' , 2000 , 'top' , 'center' );
 
     try {
 
@@ -32,14 +31,8 @@ function Login({ styles }) {
         const { password } = response.data.data.user
         sessionStorage.setItem('auth', JSON.stringify(response.data));
         setSession(JSON.parse(sessionStorage.getItem('auth')));
-        writeMessage(`Logged as ${decodeURIComponent(escape(name))} ... redirecting...`);
-        setPositions({
-          ...positions,
-          vertical:'bottom',
-          horizontal:'left'
-        })
-        setTime(2000);
-        setColor('success');
+
+        useMessage( `Logged as ${decodeURIComponent(escape(name))} ... redirecting...` , 'success' , 2000 , 'top' , 'center' );
         sessionStorage.setItem('auth_pass', JSON.stringify({"password":password}) );
         setHasPassword( JSON.parse(sessionStorage.getItem('auth_pass')) );
         setLogged( true );
@@ -51,8 +44,7 @@ function Login({ styles }) {
 
     } catch ( error ){
 
-        writeMessage(`${error} Incurred an error on loging...contact with developer`);
-        setColor('error');
+        useMessage( `${error} Incurred an error on loging...contact with developer` , 'error' , 2000 , 'top' , 'center' );
 
     }
   }
@@ -78,7 +70,7 @@ function Login({ styles }) {
       {
         logged && <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={open}
+          open={true}
         >
         <CircularProgress color="inherit" />
         </Backdrop>
