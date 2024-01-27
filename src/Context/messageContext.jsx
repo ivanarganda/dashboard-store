@@ -18,10 +18,6 @@ const MsgProvider = ({children})=>{
         setOpenned(false);
     }
 
-    const writeMessage = ( msg )=>{
-        
-    }
-
     const useMessage = ( msg , color , time , vertical = false , horizontal = false )=>{
         setOpenned( true );
         setMsg( msg );
@@ -37,7 +33,7 @@ const MsgProvider = ({children})=>{
     }
 
     return (
-        <MsgContext.Provider value={{ color , msg , opened , positions , handleClose , useMessage }}>
+        <MsgContext.Provider value={{ color , msg , time , opened , positions , handleClose , useMessage }}>
             {children}
         </MsgContext.Provider>
     )

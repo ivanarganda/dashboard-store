@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useReducer, useCallback , useMemo , useContext } from "react";
+import React, { useState, useEffect, useReducer, useCallback , useRef , useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from "./components/Header/Header";
@@ -8,7 +9,7 @@ import ShoppingCart from './components/RightSidebar/ShoppingCart';
 import Favorites from './components/RightSidebar/Favorites';
 import Settings from './components/RightSidebar/Settings';
 import Login from './components/Form/Login';
-import Footer from './components/Footer/Footer';
+import BR from './components/Tools/BR.jsx';
 
 import useLanguage from "./Hooks/estate/useLanguage";
 import { reducer, initialState } from './Hooks/reducer/useProducts';
@@ -21,6 +22,7 @@ import { MsgContext } from "./Context/messageContext.jsx";
 
 
 function App() {
+
   const [showMenu, setShowMenu] = useState(false);
   const [typeMenu, setTypeMenu] = useState('');
   const [type, setType] = useState('');
@@ -33,17 +35,12 @@ function App() {
   const { session , recoverySession , hasPassword } = useContext( AuthContext );
   const { pagination , setPagination } = useContext( PaginationContext );
   const { useMessage , setColor , positions , setPositions , setTime } = useContext( MsgContext );
+  const retrievedFavotires = useRef(false);
+  
 
   useEffect(()=>{
     if ( hasPassword.password === false ){
-      writeMessage(`By security, adviced to have a password`);
-      setPositions({
-        ...positions,
-        vertical:'top',
-        horizontal:'center'
-      })
-      setTime( 5000 );
-      setColor('warning');
+      useMessage( `By security, adviced to have a password` , 'warning' , 2000 , 'top' , 'center' );
     }
   },[])
 
@@ -107,8 +104,23 @@ function App() {
     sessionStorage.setItem('auth', JSON.stringify(session));
     
     if ( session.length !== 0 ){
+      localStorage.setItem('cart', JSON.stringify(state.cart));
+      sessionStorage.setItem('auth', JSON.stringify(session));
       sessionStorage.setItem('auth_pass', JSON.stringify({'password':session.data.user.password}));
       sessionStorage.setItem('favorites', JSON.stringify(state.favorites));
+
+      if ( retrievedFavotires.current == false && state.favorites.length === 0 ){
+          axios.get(`https://ws-api-tech.online/api/products/${session.data.user.id}`).then(( response )=>{
+            let newJSON = [];
+            newJSON = response.data.data[0].products.map((item)=>{
+                return item.product;
+            });
+            recoveryFavorites( newJSON );
+            retrievedFavotires.current = true;
+        })
+        
+      }
+
     } 
      
   }, [state.cart, state.favorites , session ]);
@@ -171,51 +183,12 @@ function App() {
   const handleFilter = (type, filter) => {
     dispatch({ type: type, payload: filter })
   }
-
-  const styles = {
-    'aside': `bg-black bg-opacity-80 w-full h-screen overflow-auto top-0 ${showMenu ? 'right-0' : '-right-full'} z-20 transition-all fixed text-white flex flex-col justify-around items-start`,
-    'sections': 'h-3/4 md:h-2/3 lg:h-full lg:pb-10 w-full flex flex-col justify-center items-center relative md:w-full lg:w-full overflow-auto'
-  }
-
-  const closeMenu = () => {
-    setTypeMenu('')
-    setType('');
-    setShowMenu(false);
-  }
-
-  const openMenu = (type) => {
-    const menus = session.length !== 0
-      ? {
-        'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart} />,
-        'Favorites': <Favorites styles={styles.sections} />,
-        'Settings': <Settings styles={styles.sections} />
-      }
-      : {
-        'ShoppingCart': <ShoppingCart styles={styles.sections} cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart} />,
-        'LoginForm': <Login styles={styles.sections} />,
-      }
-    setTypeMenu(menus[type])
-    setShowMenu(true);
-    setType(type);
-  }
-
+  
   return (
     <div className={`bg-[#262837] min-h-screen w-full`}>
+      <Router>
         <Header initialState={state} handleFilter={handleFilter} />
-        <Section
-          loading={loading}
-          initialState={state}
-          products={filteredProducts}
-          addToCart={addToCart}
-          addToFavorites={addToFavorites}
-          deleteFromFavorites={deleteFromFavorites}
-          format={{ currentLanguage }}
-        />
-        {
-          filteredProducts.length !== 0  && <Pagination_ />
-        }
-        
-        <Footer />
+        <BR />
         <Sidebar
           initialState={
             session.length !== 0 ?
@@ -225,10 +198,24 @@ function App() {
           }
           typeMenu={type}
           showMenu={showMenu}
-          functions={[goToHome, openMenu, openMenu, openMenu]}
-        />
-        <RightSidebar styles={styles.aside} typeMenu={typeMenu} type={type} closeMenu={closeMenu} />
-        <Snackbar_ sx={{ zIndex: '99' , position:'fixed' }}  />
+        /> 
+          <Routes>
+            <Route exact={true} path="/" element={ <><Section
+          loading={loading}
+          initialState={state}
+          products={filteredProducts}
+          addToCart={addToCart}
+          addToFavorites={addToFavorites}
+          deleteFromFavorites={deleteFromFavorites}
+          format={{ currentLanguage }}
+        /> { products.length !== 0 && <Pagination_ />  }<BR /><BR /> </>}/>
+            <Route exact={true} path="/cart" element={<ShoppingCart cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart} />} />
+            <Route exact={true} path="/favorites" element={<Favorites />}/>
+            <Route exact={true} path="/settings" element={<Settings />} />
+            <Route exact={true} path="/login" element={<Login />}/> 
+          </Routes>
+        </Router>
+        <Snackbar_ sx={{ zIndex: '99' , position:'fixed' }}  /> 
     </div>
   )
 }

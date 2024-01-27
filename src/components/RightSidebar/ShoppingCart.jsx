@@ -30,40 +30,39 @@ export default function ShoppingCart(props) {
   };
 
   return (
-    <section className={`${styles}`}>
+    <>
+    <section className={`w-full flex flex-row justify-center items-center m-auto`}>
       {itemsShopping
         .slice((currentPage - 1) * 3, (currentPage - 1) * 3 + 3)
         .map((item) => {
           return (
-            <div key={item.id} className='flex flex-col justify-center md:items-center w- md:w-full h-full md:flex md:flex-row md:justify-around md:m-auto'>
-              <div className='w-40 relative'>
-                <img className='w-20 h-20 sm:w-30 sm:h-30  rounded-full' src={images[item.id]} alt={item.url} />
+            <div key={item.id} className='flex flex-col w-1- mt-40 p-5 ml-10 rounded-2xl justify-center bg-gray-300'>
+              <div className='relative flex items-center m-auto'>
+                <img className='w-40 h-40 rounded-2xl' src={images[item.id-1]} alt={item.url} />
                 <span
                   onClick={() => {
                     handleDeleteFromCart(item.id);
                   }}
-                  className='absolute top-0 right-1/4 p-1 rounded-2xl bg-gray-400 cursor-pointer hover:text-gray-600 hover:bg-white transition-all'
+                  className='absolute -top-11 right-1/3 p-1 rounded-2xl bg-gray-400 cursor-pointer hover:text-gray-600 hover:bg-white transition-all'
                 >
-                  <ClearOutlinedIcon color='white' />
+                  <ClearOutlinedIcon sx={{fontSize:'30px'}} color='white' />
                 </span>
               </div>
-              <form className='w-40'>
+              <form className='relative flex flex-col items-center m-auto'>
                 <h4>{item.name}</h4>
                 <label>
                   <span>
-                    <details className='transition-all'>
                       <ul>
                         {especifications[item.category].map((l, idx) => {
                           return <li key={idx}>{l}: {item.specifications[l]}</li>;
                         })}
                       </ul>
-                    </details>
                   </span>
                 </label>
               </form>
-              <span className='w-50 flex flex-col justify-center'>
+              <span className='relative flex flex-col items-center m-auto'>
                 <b>Quantity:</b>
-                <div className='w-full flex flex-row '>
+                <div className='relative flex flex-row items-center m-auto'>
                 <button
                   className='text-black font-bold outline-none bg-white w-10 border hover:bg-gray-300 transition-all'
                   onClick={(event) => {
@@ -100,44 +99,42 @@ export default function ShoppingCart(props) {
                   +
                 </button>
                 </div>
-                
               </span>
-              <div>€{item.specifications.price}</div>
             </div>
           );
         })}
 
       {/* Pagination */}
-
-      {itemsShopping.length > 0 ? (
-        <Pagination
-          onChange={handlePage}
-          page={currentPage}
-          showFirstButton
-          showLastButton
-          sx={{
-            marginTop: '3rem',
-            color: 'white',
-            background: 'white',
-            borderRadius: '0.4rem 0.4rem 0.4rem 0.4rem',
-            width: '50%',
-            minWidth: '350px',
-            margin: 'auto',
-            '@media (max-width: 400px)': {
-              width: '80%',
-              minWidth: '250px',
-            },
-          }}
-          count={Math.ceil(itemsShopping.length / 3)}
-          color='primary'
-          size={'medium'}
-        />
-      ) : (
-        <div className='flex flex-col justify-center items-center w-full h-full'>
-          <RemoveShoppingCartIcon sx={{ fontSize: '100px' }} />
-          <h4 className='text-gray-300 text-2xl'>Shopping cart empty</h4>
-        </div>
-      )}
     </section>
+    {itemsShopping.length > 0 ? (
+      <Pagination
+        onChange={handlePage}
+        page={currentPage}
+        showFirstButton
+        showLastButton
+        sx={{
+          marginTop: '3rem',
+          color: 'white',
+          background: 'white',
+          borderRadius: '0.4rem 0.4rem 0.4rem 0.4rem',
+          width: '50%',
+          minWidth: '350px',
+          margin: 'auto',
+          '@media (max-width: 400px)': {
+            width: '80%',
+            minWidth: '250px',
+          },
+        }}
+        count={Math.ceil(itemsShopping.length / 3)}
+        color='primary'
+        size={'medium'}
+      />
+    ) : (
+      <div className='flex mt-[300px] flex-col justify-center items-center w-full'>
+        <RemoveShoppingCartIcon sx={{ fontSize: '100px' , color:'white' }} />
+        <h4 className='text-gray-300 text-2xl'>Shopping cart empty</h4>
+      </div>
+    )}
+    </>
   );
 }

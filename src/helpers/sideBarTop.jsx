@@ -12,34 +12,41 @@ export const sideBarTop = (session)=>{
         
         {
             "item":"Home",
-            "icon":<Home sx={{fontSize:30}}/>
+            "icon":<Home sx={{fontSize:30}}/>,
+            "path":"/"
         },
         {
             "item":"ShoppingCart",
-            "icon":<ShoppingCart sx={{fontSize:30}}/>
+            "icon":<ShoppingCart sx={{fontSize:30}}/>,
+            "path":"/cart"
         },
         
         {
             "item":"Favorites",
-            "icon":<FavoriteIcon sx={{fontSize:30}}/>
+            "icon":<FavoriteIcon sx={{fontSize:30}}/>,
+            "path":"/favorites"
         },
         {
             "item":"Settings",
-            "icon":<SettingsIcon sx={{fontSize:30}}/>
+            "icon":<SettingsIcon sx={{fontSize:30}}/>,
+            "path":"/settings"
         }
 
     ] : [
         {
             "item":"Home",
-            "icon":<Home sx={{fontSize:30}}/>
+            "icon":<Home sx={{fontSize:30}}/>,
+            "path":"/"
         },
         {
             "item":"ShoppingCart",
-            "icon":<ShoppingCart sx={{fontSize:30}}/>
+            "icon":<ShoppingCart sx={{fontSize:30}}/>,
+            "path":"/cart"
         },
         {
             "item":"LoginForm",
-            "icon":<><PersonOutlineIcon /><LoginIcon sx={{fontSize:30}}/></>
+            "icon":<><PersonOutlineIcon /><LoginIcon sx={{fontSize:30}}/></>,
+            "path":"/login"
         },
     ]
 

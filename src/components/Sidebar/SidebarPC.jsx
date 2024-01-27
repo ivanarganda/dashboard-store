@@ -1,10 +1,11 @@
 import React , { useContext } from 'react'
 import { useSidebar } from '../../Hooks/estate/useSidebar';
 import { AuthContext } from "./../../Context/authContext";
+import { Link } from 'react-router-dom';
 
 export default function SidebarPC( props ) {
 
-  const { initialState , session , typeMenu , functions } = props;
+  const { initialState , session , typeMenu } = props;
 
   const [ itemsTop ] = useSidebar('top' , session );
 
@@ -23,11 +24,11 @@ export default function SidebarPC( props ) {
                   active = 'bg-[#ec7c6a] text-white rounded-tl-xl  rounded-tr-xl rounded-bl-xl  rounded-br-xl';
               }
 
-              return <li key={idx} className={`hover:bg-[#262837] p-4 rounded-tl-xl rounded-bl-xl transition-all`}>
-                    <span onClick={ item.item == 'Home' ? functions[idx] : ()=>functions[idx]( item.item )} className={`${active} p-4 flex  justify-center  text-[#ec7c6a] cursor-pointer`}>
+              return <Link key={idx} to={item.path} className={`hover:bg-[#262837] p-4 rounded-tl-xl rounded-bl-xl transition-all`}>
+                    <span className={`${active} p-4 flex  justify-center  text-[#ec7c6a] cursor-pointer`}>
                       { item.icon }{ initialState[idx]}
                     </span>
-                </li>
+                </Link>
             })
           } 
         </ul>

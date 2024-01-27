@@ -1,10 +1,11 @@
 import React , { useContext, useEffect } from 'react'
 import { useSidebar } from '../../Hooks/estate/useSidebar';
 import { AuthContext } from "./../../Context/authContext";
+import { Link } from 'react-router-dom';
 
 export default function SidebarMobile(props) {
 
-    const { initialState , session , typeMenu , functions } = props;
+    const { initialState , session , typeMenu } = props;
 
     const [ itemsMobile ] = useSidebar('mobile' , session );
 
@@ -21,7 +22,7 @@ export default function SidebarMobile(props) {
                         }
 
                         return <li className='pl-2 pr-2' key={li.item}>
-                            <span onClick={ li.item == 'Home' ? functions[idx] : ()=>functions[idx]( li.item )} className={`${active} text-[#bbb] transition-all cursor-pointer`}>{ li.icon }{ initialState[idx]}</span>
+                            <span className={`${active} text-[#bbb] transition-all cursor-pointer`}>{ li.icon }{ initialState[idx]}</span>
                             </li> 
                     })
                 }

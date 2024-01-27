@@ -5,7 +5,7 @@ import { MsgContext } from '../../Context/messageContext';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-function Login({ styles }) {
+function Login() {
 
   const { setSession , setHasPassword } = useContext(AuthContext);
   const { useMessage } = useContext( MsgContext ); 
@@ -64,7 +64,7 @@ function Login({ styles }) {
   }, []);
 
   return (
-    <section className={`${styles}`}>
+    <section className={`flex mt-[300px] flex-col justify-center items-center`}>
       <div id='signInDiv'>
       </div>
       {

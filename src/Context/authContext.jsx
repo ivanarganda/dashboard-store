@@ -11,12 +11,18 @@ const AuthProvider = ({children}) => {
         setSession(auth)
     }
 
+    const logOut = ()=>{
+        sessionStorage.removeItem('auth');
+        setSession([]);
+        window.location='/';
+    }
+
     useEffect(()=>{
        setHasPassword( JSON.parse(sessionStorage.getItem('auth_pass')) );
     },[ session ])
 
     return (
-        <AuthContext.Provider value={{session , setSession , recoverySession , setHasPassword , hasPassword }}>
+        <AuthContext.Provider value={{session , setSession , recoverySession , setHasPassword , logOut , hasPassword }}>
             {children}
         </AuthContext.Provider>
     )
