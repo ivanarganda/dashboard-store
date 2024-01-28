@@ -7,6 +7,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CheckIcon from '@mui/icons-material/Check';
 
 import { GoogleLogin  } from '@react-oauth/google';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import RestoreIcon from '@mui/icons-material/Restore';
+import ChecklistIcon from '@mui/icons-material/Checklist';
 
 function Login() {
 
@@ -67,19 +70,24 @@ function Login() {
         <div>
           <p className='text-gray-500 font-bold mb-3'>Do not miss last features, you could:</p>
           <ul>
-            <li className='style- flex flex-row space-x-3 mt-6'>
-              <CheckIcon color='success'/>
-              <span>Save products as favorites and then purchage them</span>
+            <li className='style- flex flex-row space-x-3 mt-14 items-center justify-center'>
+              <CheckIcon sx={{fontSize:'40px'}} color='success'/>
+              <span className='text-gray-500 font-bold'>Save products as favorites and then purchage them</span>
             </li>
             <li className='style- flex flex-row space-x-3 mt-6'>
-              <CheckIcon color='success'/>
-              <span>Save budgets for next time if at moment you dont want to complete it</span>
+              <CheckIcon sx={{fontSize:'40px'}} color='success'/>
+              <span className='text-gray-500 font-bold'>Save budgets for next time if at moment you dont want to complete it</span>
             </li>
             <li className='style- flex flex-row space-x-3 mt-6'>
-              <CheckIcon color='success'/>
-              <span>Give your feedback on each product</span>
+              <CheckIcon sx={{fontSize:'40px'}} color='success'/>
+              <span className='text-gray-500 font-bold'>Give your feedback on each product</span>
             </li>
           </ul>
+        </div>
+        <div className='flex flex-row justify-center gap-20 m-auto'>
+          <LocalShippingIcon sx={{fontSize:'50px'}}/>
+          <RestoreIcon sx={{fontSize:'50px'}}/>
+          <ChecklistIcon sx={{fontSize:'50px'}}/>
         </div>
       </article>
       <article className='ml-40 mb-10 mt-40 w-2/3'>
