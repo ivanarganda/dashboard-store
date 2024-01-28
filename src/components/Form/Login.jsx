@@ -62,15 +62,15 @@ function Login() {
   }
 
   return (
-    <section className={`flex flex-row justify-center items-start min-h-screen w-full`}>
-      <article className='flex flex-col gap-4 ml-40 mb-10 mt-40 w-1/3 h-[600px] bg-gray-200 rounded p-10 shadow-xl'>
+    <section className={`flex justify-center items-start min-h-screen w-2/3`}>
+      <article className='flex flex-col gap-4 ml-80 mb-10 mt-40 w-1/3 min-w-fit min-h-fit h-[500px] bg-gray-200 rounded p-10 shadow-xl'>
         <div>
-          <h4 className='text-gray-700 font-bold text-xl'>Why to log in?</h4>
+          <h4 className='text-gray-700 font-bold text-2xl'>Why to log in?</h4>
         </div>
         <div>
-          <p className='text-gray-500 font-bold mb-3'>Do not miss last features, you could:</p>
+          <p className='text-gray-500 font-bold mb-3 text-xl'>Do not miss last features, you could:</p>
           <ul>
-            <li className='style- flex flex-row space-x-3 mt-14 items-center justify-center'>
+            <li className='style- flex flex-row space-x-3 mt-14 items-center justify-start'>
               <CheckIcon sx={{fontSize:'40px'}} color='success'/>
               <span className='text-gray-500 font-bold'>Save products as favorites and then purchage them</span>
             </li>
