@@ -4,6 +4,9 @@ import { AuthContext } from './../../Context/authContext';
 import { MsgContext } from '../../Context/messageContext';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import CheckIcon from '@mui/icons-material/Check';
+
+import { GoogleLogin  } from '@react-oauth/google';
 
 function Login() {
 
@@ -16,7 +19,7 @@ function Login() {
     // Decode the header and payload
     const header = JSON.parse(atob(headerEncoded));
     const payload = JSON.parse(atob(payloadEncoded));
-    const { email, name , sub } = payload;
+    const { email, name , sub , picture } = payload;
 
     useMessage( `Logging.....` , 'success' , 2000 , 'top' , 'center' );
 
@@ -28,7 +31,13 @@ function Login() {
         'google_id': sub
       }).then((response) => {
 
+        // Set a first party cookie for GoogleOAuth
+        document.cookie = `oauthToken=${response.credential}; path=/; domain=https://igvtech.online; secure`;
+
         const { password } = response.data.data.user
+
+        response.data.picture = picture;
+
         sessionStorage.setItem('auth', JSON.stringify(response.data));
         setSession(JSON.parse(sessionStorage.getItem('auth')));
 
@@ -37,7 +46,7 @@ function Login() {
         setHasPassword( JSON.parse(sessionStorage.getItem('auth_pass')) );
         setLogged( true );
         setTimeout(()=>{
-          window.location='';
+          window.location='/';
         },3000)
 
       });
@@ -49,24 +58,37 @@ function Login() {
     }
   }
 
-  useEffect(() => {
-    // Global google
-    google.accounts.id.initialize({
-      client_id: '909316839836-f6ig5si1ab9qo7u8jtddt4or98rlhoju.apps.googleusercontent.com',
-      callback: handleCallbackResponse
-    });
-
-    google.accounts.id.renderButton(
-      document.getElementById('signInDiv'),
-      { theme: 'filled', size: 'large' }
-    );
-
-  }, []);
-
   return (
-    <section className={`flex mt-[300px] flex-col justify-center items-center`}>
-      <div id='signInDiv'>
-      </div>
+    <section className={`flex flex-row justify-center items-start min-h-screen w-full`}>
+      <article className='flex flex-col gap-4 ml-40 mb-10 mt-40 w-1/3 h-[600px] bg-gray-200 rounded p-10 shadow-xl'>
+        <div>
+          <h4 className='text-gray-700 font-bold text-xl'>Why to log in?</h4>
+        </div>
+        <div>
+          <p className='text-gray-500 font-bold mb-3'>Do not miss last features, you could:</p>
+          <ul>
+            <li className='style- flex flex-row space-x-3 mt-6'>
+              <CheckIcon color='success'/>
+              <span>Save products as favorites and then purchage them</span>
+            </li>
+            <li className='style- flex flex-row space-x-3 mt-6'>
+              <CheckIcon color='success'/>
+              <span>Save budgets for next time if at moment you dont want to complete it</span>
+            </li>
+            <li className='style- flex flex-row space-x-3 mt-6'>
+              <CheckIcon color='success'/>
+              <span>Give your feedback on each product</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+      <article className='ml-40 mb-10 mt-40 w-2/3'>
+        <h4 className='text-gray-300 text-3xl mb-3'>Log in</h4>
+        <GoogleLogin
+          onSuccess={handleCallbackResponse}
+        />
+      </article>
+      
       {
         logged && <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

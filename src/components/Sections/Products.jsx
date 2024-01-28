@@ -3,6 +3,7 @@ import { AuthContext } from "./../../Context/authContext";
 import { ImagesProductsContext } from '../../Context/imagesProducts';
 import { especifications } from './../../helpers/specifications';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import CheckIcon from '@mui/icons-material/Check';
 
 const Products = (props) => {
 
@@ -27,10 +28,10 @@ const Products = (props) => {
       products?.map((p, idx) => {
 
         return  (
-          <article className='h-full flex flex-col justify-center items-center' key={p.id}>
-            <figure className='bg-gray-200 bg-opacity-10 w-80 mt-20 h-full relative flex flex-col justify-center items-center text-gray-400 rounded-xl'>
+          <article className='h-full md:-ml-0 xl:-ml-40 flex flex-col justify-center items-center' key={p.id}>
+            <figure className='bg-gray-200 bg-opacity-10 w-2/3 min-w-fit shadow-2xl mt-20 h-full relative flex flex-col justify-center items-center text-gray-400 rounded-xl'>
               <img src={images[p.id-1]} className='w-40 h-40 rounded absolute -top-14 border border-[#bbb]' alt="" />
-              <figcaption className='w-full h-full flex m-auto flex-col items-center justify-center p-4'>
+              <figcaption className='w-full h-full flex m-auto flex-col min-w-fit items-center justify-center p-4'>
                 <div className='w-full m-auto flex flex-col items-center mt-20 justify-around'>
                   <div className='mt-10'>
                     <p className='text-gray-100'>{p.name}</p>
@@ -38,19 +39,20 @@ const Products = (props) => {
                   <div className='mt-10'>
                     <ul>
                       {especifications[p.category]?.map((l, idx) => {
-                          return <li key={idx}><span className='text-white capitalize'>{l}:</span><span className='text-gray-200'>{p.specifications[l]}</span></li>;
+                          return <li className='flex flex-row space-x-2' key={idx}><CheckIcon sx={{fontSize:'30px'}} color='success'/><span className='text-white capitalize'>
+                            {l}:</span><span className='text-gray-200'>{p.specifications[l]}
+                          </span></li>;
                       })}
                     </ul> 
                   </div>
                   <div className='mt-10'>
                     <p className='text-white'>{`${p.specifications.price}€`}</p>
                     {
-                      initialState.cart?.find((index)=>index.id === p.id ) ? 
-                      <p className='text-white'>Added to cart: {`${initialState.cart[idx]?.quantity || 0}`}</p>
+                      initialState.cart?.find((item) => item.id === p.id) ? 
+                      <p className='text-white'>Added to cart: {`${initialState.cart.find((item) => item.id === p.id).quantity}`}</p>
                       : 
                       <p className='text-white'>Added to cart: 0</p>
                     }
-                    
                   </div>
                 </div>
                 <div className='flex flex-row justify-around w-full mt-10'>

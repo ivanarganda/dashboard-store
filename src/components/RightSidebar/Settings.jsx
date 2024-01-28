@@ -24,9 +24,8 @@ export default function Settings(props) {
         {/* For PC */}
         <ul className='mt-36 flex flex-row w-full items-center'>
           <div className='flex flex-row items-center sm:justify-center w-full'>
-            <li className='mt-8 ml-2 w-24 h-24 relative cursor-pointer'>
-              <span className='rounded-full bg-gray-400 text-gray-400 w-24 h-24 text-6xl '>''''''</span>
-              <span className='absolute top-0 left-8 w-full h-full text-white capitalize text-6xl'>{username[0]}</span>
+            <li className='ml-2 w-24 h-24 flex flex-col items-center h-full justify-center relative cursor-pointer'>
+              <img src={session.picture} className='flex flex-col w-full h-full rounded-full items-center m-auto' alt="" />
             </li>
             <li>{username}</li>
           </div>

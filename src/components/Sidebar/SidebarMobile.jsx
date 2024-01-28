@@ -21,9 +21,9 @@ export default function SidebarMobile(props) {
                             active = 'text-[#ec7c6a]';
                         }
 
-                        return <li className='pl-2 pr-2' key={li.item}>
+                        return <Link to={li.path} className='pl-2 pr-2' key={li.item}>
                             <span className={`${active} text-[#bbb] transition-all cursor-pointer`}>{ li.icon }{ initialState[idx]}</span>
-                            </li> 
+                            </Link> 
                     })
                 }
             </ul>

@@ -24,14 +24,14 @@ export const reducer = (state, action) => {
     
     if (action.type === 'ADD_PRODUCT_CART') {
       let newProduct = action.payload.products.find((product) => product.id === action.payload.id);
-  
+    
       if (state.cart.some((item) => item.id === action.payload.id)) {
         // If the product already exists in the cart, increment its quantity
-        return { 
+        return {
           ...state,
           cart: state.cart.map((item) =>
             item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
+              ? { ...item, quantity: (item.quantity || 0) + 1 } // Initialize quantity if it's undefined
               : item
           ),
         };
@@ -39,20 +39,19 @@ export const reducer = (state, action) => {
         // If the product doesn't exist in the cart, add it with quantity 1
         return {
           ...state,
-          cart: [...state.cart, { ...newProduct, quantity: 1 }],
+          cart: [...state.cart, { ...newProduct, quantity: 1 }], // Initialize quantity here
         };
       }
-      
     }
-
-    if (action.type === 'ADD_QUANTITY_PRODUCT_CART'){
+    
+    if (action.type === 'ADD_QUANTITY_PRODUCT_CART') {
       if (state.cart.some((item) => item.id === action.payload.id)) {
-        // If the product already exists in the cart, increment its quantity
+        // If the product already exists in the cart, update its quantity
         return {
           ...state,
           cart: state.cart.map((item) =>
             item.id === action.payload.id
-              ? { ...item, quantity: parseInt(action.payload.newQuantity) }
+              ? { ...item, quantity: parseInt(action.payload.newQuantity) || 0 } // Ensure quantity is not undefined
               : item
           ),
         };

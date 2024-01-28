@@ -13,12 +13,15 @@ const AuthProvider = ({children}) => {
 
     const logOut = ()=>{
         sessionStorage.removeItem('auth');
+        sessionStorage.removeItem('auth_pass');
         setSession([]);
         window.location='/';
     }
 
     useEffect(()=>{
+        // Set first coockies to avoid third blocked cookies
        setHasPassword( JSON.parse(sessionStorage.getItem('auth_pass')) );
+
     },[ session ])
 
     return (
@@ -28,4 +31,4 @@ const AuthProvider = ({children}) => {
     )
 }
 
-export { AuthContext , AuthProvider }
+export { AuthContext , AuthProvider } 
