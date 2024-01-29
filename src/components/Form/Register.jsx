@@ -1,7 +1,11 @@
 import React from 'react'
 
-export default function Register() {
+export default function Register({ changeForm }) {
   return (
-    <div>Register</div>
+    <form>
+        Register
+
+        <span>Do you have already account?</span><button onClick={ ( e )=>{ e.preventDefault(); changeForm('Sign in') } }>Sign in</button>
+    </form>
   )
 }

@@ -8,7 +8,6 @@ import RightSidebar from './components/RightSidebar/RightSidebar';
 import ShoppingCart from './components/RightSidebar/ShoppingCart';
 import Favorites from './components/RightSidebar/Favorites';
 import Settings from './components/RightSidebar/Settings';
-import Login from './components/Form/Login';
 import BR from './components/Tools/BR.jsx';
 
 import useLanguage from "./Hooks/estate/useLanguage";
@@ -20,6 +19,7 @@ import Pagination_ from './components/Sections/Pagination';
 import Snackbar_ from './components/Snackbar/Snackbar';
 import { MsgContext } from "./Context/messageContext.jsx";
 import Register from './components/Form/Register';
+import Auth from "./components/Form/Auth.jsx";
 
 
 function App() {
@@ -186,7 +186,7 @@ function App() {
   }
 
   return (
-    <div className={`bg-gray-500 min-h-screen w-full relative`}>
+    <div className={`bg-gray-500 min-h-screen w-full min-w-[350px] relative`}>
       <Router basename="/">
       <Header initialState={state} handleFilter={handleFilter} />
           <BR />
@@ -213,7 +213,7 @@ function App() {
           <Route exact path="/cart" element={<ShoppingCart cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart} />} />
           <Route exact path="/favorites" element={<Favorites loading={loading} initialState={state} addToCart={addToCart} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} />} />
           <Route exact path="/settings" element={<Settings />} />
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/auth" element={<Auth />} />
           <Route exact path="/register" element={<Register />} />
         </Routes>
       </Router>
