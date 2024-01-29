@@ -10,7 +10,9 @@ import { useGoogleLogin  } from '@react-oauth/google';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import RestoreIcon from '@mui/icons-material/Restore';
 import ChecklistIcon from '@mui/icons-material/Checklist';
-import BR from './../Tools/BR';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 function Login() {
 
@@ -18,7 +20,7 @@ function Login() {
   const { useMessage } = useContext( MsgContext ); 
   const [ logged , setLogged ] = useState( false ); 
 
-  const handleCallbackResponse = async(response_login) => {
+  const authGoogle = async(response_login) => {
   
     useMessage( `Logging.....` , 'success' , 2000 , 'top' , 'center' );
 
@@ -70,11 +72,11 @@ function Login() {
   }
 
   const login = useGoogleLogin({
-    onSuccess: (response) => handleCallbackResponse( response ),
+    onSuccess: (response) => authGoogle( response ),
   })
 
   return (
-    <section className={`w-full flex flex-col-reverse justify-center m-auto items-center sm:mt-10 lg:flex lg:flex-row lg:justify-center items-center lg:mt-20`}>
+    <section className={`flex flex-col-reverse justify-center m-auto items-center sm:mt-10 lg:flex lg:flex-row lg:justify-center items-center lg:mt-8`}>
       <article className='mt-20 mb-40 lg:mt-20 lg:w-full min-w-[350px] w-1/2 lg:ml-60 bg-gray-300 shadow-xl m-auto rounded-xl p-10'>
         <div>
           <h4 className='text-gray-700 font-bold text-2xl'>Why to log in?</h4>
@@ -96,16 +98,24 @@ function Login() {
             </li>
           </ul>
         </div>
-        <div className='flex flex-row justify-center gap-20 m-auto mt-10'>
+        <div className='flex flex-col items-center justify-center gap-20 m-auto mt-10'>
           <LocalShippingIcon sx={{fontSize:'50px'}}/>
           <RestoreIcon sx={{fontSize:'50px'}}/>
           <ChecklistIcon sx={{fontSize:'50px'}}/>
         </div>
       </article>
-      <article className='lg:mt-20 sm:pl-0 m-auto lg:ml-40'>
+      <article className='mt-20 flex flex-col items-center lg:w-full lg:mt-20 sm:pl-0 m-auto lg:ml-40'>
         <h4 className='text-gray-300 text-3xl mb-3'>Log in</h4>
-        <div style={{ width: '100%' }}>
-        <button onClick={()=>login()}>Sign in</button>
+        <div className='flex flex-row justify-center gap-10 items-center mt-10'>
+          <button onClick={()=>login()}>
+            <GoogleIcon sx={{fontSize:'40px'}}/>
+          </button>
+          <button>
+            <FacebookIcon sx={{fontSize:'40px'}}/>
+          </button>
+          <button>
+            <GitHubIcon sx={{fontSize:'40px'}}/>
+          </button>
         </div>
       </article>
       
@@ -118,8 +128,6 @@ function Login() {
         <CircularProgress color="inherit" />
         </Backdrop>
       }
-
-      <BR />
       
     </section>
   )
