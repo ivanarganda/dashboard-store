@@ -186,7 +186,7 @@ function App() {
   }
 
   return (
-    <div className={`bg-gray-500 min-h-screen w-full`}>
+    <div className={`bg-gray-500 min-h-screen w-full relative`}>
       <Router basename="/">
       <Header initialState={state} handleFilter={handleFilter} />
           <BR />

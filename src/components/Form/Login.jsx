@@ -6,7 +6,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import CheckIcon from '@mui/icons-material/Check';
 
-import { googleLogout , useGoogleLogin  } from '@react-oauth/google';
+import { useGoogleLogin  } from '@react-oauth/google';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import RestoreIcon from '@mui/icons-material/Restore';
 import ChecklistIcon from '@mui/icons-material/Checklist';
@@ -19,14 +19,7 @@ function Login() {
   const [ logged , setLogged ] = useState( false ); 
 
   const handleCallbackResponse = async(response_login) => {
-    // const [headerEncoded, payloadEncoded, signature] = response.access_token.split('.');
-    // // Decode the header and payload
-    // const header = JSON.parse(atob(headerEncoded));
-    // const payload = JSON.parse(atob(payloadEncoded));
-    // const { email, name , sub , picture } = payload;
-
-    // console.log( payload );
-
+  
     useMessage( `Logging.....` , 'success' , 2000 , 'top' , 'center' );
 
     try {
@@ -39,8 +32,6 @@ function Login() {
             }
         })
         .then((res) => {
-
-          console.log( res.data );
 
           const { name , email , id , picture } = res.data;
           axios.post('https://ws-api-tech.online/api/login/google', {

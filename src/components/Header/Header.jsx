@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import Navbar from './Navbar';
-import { initialState } from '../../Hooks/reducer/useProducts';
 
 function Header( props ) {  
 
   return (
-    <header>
+    <header id='header_main'>
       <Navbar initialState={props.initialState} handleFilter={props.handleFilter}/>
     </header>
   )

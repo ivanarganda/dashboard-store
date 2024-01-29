@@ -33,7 +33,7 @@ export default function ShoppingCart(props) {
 
   return (
     <>
-    <section className='w-full pt-24 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
+    <section className='w-full sm:pt-24 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
         {itemsShopping
           .slice((currentPage - 1) * 10, (currentPage - 1) * 10 + 10)
           .map((item) => {

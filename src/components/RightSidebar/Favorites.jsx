@@ -1,16 +1,25 @@
-import React, { useEffect , useContext } from 'react';
+import React, { useEffect , useContext , useState } from 'react';
 import { AuthContext } from "./../../Context/authContext";
 import { ImagesProductsContext } from '../../Context/imagesProducts';
 import { especifications } from './../../helpers/specifications';
+import BR from './../Tools/BR';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import Pagination from '@mui/material/Pagination';
 
 const Favorites = (props) => {
 
   let { loading , initialState , addToCart , addToFavorites , deleteFromFavorites } = props;
   const { session } = useContext( AuthContext );
+  const [currentPage, setCurrentPage] = useState(1);
   const { images } = useContext( ImagesProductsContext );
 
+  const handlePage = (event, value) => {
+    setCurrentPage(value);
+  };
+
   return (
-    <section className='w-full pt-20 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
+    <>
+    <section className='w-full sm:pt-24 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
        
       {
       loading ? <span className="w-full min-h-screen flex flex-col m-80 text-5xl text-gray-300">Loading...</span> :
@@ -66,6 +75,36 @@ const Favorites = (props) => {
         );
       })}
     </section>
+    {initialState.favorites.length > 0 ?
+      <>
+      <Pagination
+        onChange={handlePage}
+        page={currentPage}
+        showFirstButton
+        showLastButton
+        sx={{
+          marginTop: '3rem',
+          color: 'white',
+          background: 'white',
+          borderRadius: '0.4rem 0.4rem 0.4rem 0.4rem',
+          width: '50%',
+          minWidth: '350px',
+          margin: 'auto',
+          '@media (max-width: 400px)': {
+            width: '80%',
+            minWidth: '250px',
+          },
+        }}
+        count={Math.ceil(initialState.favorites.length / 3)}
+        color='primary'
+        size={'medium'}
+      /><BR/><BR/></>
+     : 
+      <div className='flex mt-[300px] flex-col justify-center items-center w-full'>
+        <RemoveShoppingCartIcon sx={{ fontSize: '100px', color: 'white' }} /> 
+        <h4 className='text-gray-300 text-2xl'>Shopping cart empty</h4>
+      </div>}
+      </>
   );
 };
 
