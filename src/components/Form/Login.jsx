@@ -76,7 +76,7 @@ function Login() {
   })
 
   return (
-    <section className={`flex flex-col-reverse justify-center m-auto items-center sm:mt-10 lg:flex lg:flex-row lg:justify-center items-center lg:mt-8`}>
+    <section className={`flex flex-col-reverse justify-center m-auto items-center sm:mt-10 lg:flex lg:flex-row lg:justify-center items-center lg:mt-40`}>
       <article className='mt-20 mb-40 lg:mt-20 lg:w-full min-w-[350px] w-1/2 lg:ml-60 bg-gray-300 shadow-xl m-auto rounded-xl p-10'>
         <div>
           <h4 className='text-gray-700 font-bold text-2xl'>Why to log in?</h4>
@@ -98,7 +98,7 @@ function Login() {
             </li>
           </ul>
         </div>
-        <div className='flex flex-col items-center justify-center gap-20 m-auto mt-10'>
+        <div className='flex flex-row items-center justify-center gap-20 m-auto mt-10'>
           <LocalShippingIcon sx={{fontSize:'50px'}}/>
           <RestoreIcon sx={{fontSize:'50px'}}/>
           <ChecklistIcon sx={{fontSize:'50px'}}/>
