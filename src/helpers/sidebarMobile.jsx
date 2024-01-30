@@ -46,7 +46,7 @@ export const sidebarMobile = (session)=>{
         {
             "item":"LoginForm",
             "icon":<><PersonOutlineIcon /><LoginIcon sx={{fontSize:30}}/></>,
-            "path":"/login"
+            "path":"/auth"
         },
     ]
 } 

@@ -29,9 +29,20 @@ function Auth() {
 
   const getAuthForm = ( currentAuth )=>{
 
+    const styles = {
+      form:'flex w-full flex-col p-6 min-w-fit',
+      inputLabels:'flex flex-col justify-center w-full min-w-fit mt-2',
+      label:'flex flex-row justify-center items-start w-full m-auto text-gray-300 text-xl mb-1',
+      input:'relative bg-gray-100 rounded-md p-2 outline-none',
+      spanLabels:'flex flex-row w-full m-auto items-center justify-center mt-2 space-x-3',
+      buttonsLabel:'flex flex-row w-full m-auto items-center justify-center mt-10 space-x-20',
+      buttonSubmit:'p-2 bg-orange-400 text-gray-100 text-lg hover:bg-orange-800 active:bg-tomato transition-all w-full',
+      buttonClear:'p-2 bg-orange-700 text-gray-100 text-lg hover:bg-orange-800 active:bg-tomato transition-all w-full'
+    }
+
     const form = { 
-        'Sign in':<Login changeForm={changeForm}/>,
-        'Sign up':<Register changeForm={changeForm} />
+        'Sign in':<Login changeForm={changeForm} styles={styles}/>,
+        'Sign up':<Register changeForm={changeForm} styles={styles}/>
     }
 
     return form[ currentAuth ];
@@ -135,9 +146,9 @@ function Auth() {
             <GitHubIcon className='hover:text-white transition-color' color='secondary' sx={{fontSize:'40px'}}/>
           </button>
         </div>
-        <span className='relative mb-10 mt-10 w-full text-white before:content: ""
+        <span className='relative mb-1 mt-10 w-full text-white before:content: ""
                 before:w-80 before:absolute before:top-1/2 before:h-[1px] before:bg-gray-500 before:leff-0 flex flex-row justify-center m-auto items-center'>
-            <span className='bg-[#1F1D2B] pr-5 pl-5 absolute letter-spacing-normal inline-block'>
+            <span className='bg-[#1F1D2B] pr-5 pl-5 absolute letter-spacing-normal inline-block text-xl text-gray-100'>
                     Or instead
             </span>
         </span>
