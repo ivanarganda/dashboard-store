@@ -31,9 +31,9 @@ function Auth() {
 
     const styles = {
       form:'flex w-full flex-col p-6 min-w-fit',
-      inputLabels:'flex flex-col justify-center w-full min-w-fit mt-2',
+      inputLabels:'flex flex-col relative justify-center w-full min-w-fit mt-2',
       label:'flex flex-row justify-center items-start w-full m-auto text-gray-300 text-xl mb-1',
-      input:'relative bg-gray-100 rounded-md p-2 outline-none',
+      input:'relative bg-gray-100 text-lg text-gray-600 font-bold rounded-md p-2 outline-none apearance-none',
       spanLabels:'flex flex-row w-full m-auto items-center justify-center mt-2 space-x-3',
       buttonsLabel:'flex flex-row w-full m-auto items-center justify-center mt-10 space-x-20',
       buttonSubmit:'p-2 bg-orange-400 text-gray-100 text-lg hover:bg-orange-800 active:bg-tomato transition-all w-full',
