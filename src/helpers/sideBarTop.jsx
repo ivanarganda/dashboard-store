@@ -8,7 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 
 export const sideBarTop = (session)=>{
 
-    return session.length !== 0 ? [
+    return session ? [
         
         {
             "item":"Home",

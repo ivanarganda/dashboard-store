@@ -19,7 +19,7 @@ const Favorites = (props) => {
 
   return (
     <>
-    <section className='w-full sm:pt-24 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
+    <section className='w-full pt-10 sm:pt-10 md:pt-10 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
        
       {
       loading ? <span className="w-full min-h-screen flex flex-col m-80 text-5xl text-gray-300">Loading...</span> :

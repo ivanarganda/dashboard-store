@@ -12,7 +12,7 @@ const Products = (props) => {
   const { images } = useContext( ImagesProductsContext );
 
   return (
-    <section className='w-full sm:pt-20 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
+    <section className='w-full pt-10 sm:pt-0 md:pt-10 pb-10 lg:pl-20 xl:pl-10 grid md:grid-cols-2 xl:pl-60 lg:grid-cols-2 xl:grid-cols-3'>
       
       {
       loading ? <span className="w-full min-h-screen flex flex-col m-80 text-5xl text-gray-300">Loading...</span> :
@@ -58,7 +58,7 @@ const Products = (props) => {
                 <div className='flex flex-row justify-around w-full mt-10'>
                      <button className='bg-[#262837] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => addToCart(p.id)}>Add to cart</button>
                   {
-                   session.length !== 0 && ( 
+                   session && ( 
                    initialState.favorites.find((index)=>index.id == p.id ) ? 
                       <button className='bg-[#ec7c6a] p-2 rounded-md text-white hover:bg-[#4B4B4B] transition-all' onClick={() => { deleteFromFavorites(p.id); }}>Delete from favorites</button> 
                       : 

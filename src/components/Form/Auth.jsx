@@ -18,7 +18,7 @@ import Register from './Register';
 
 function Auth() {
 
-  const { setSession , setHasPassword } = useContext(AuthContext);
+  const { setSession , setCookieSession , setHasPassword } = useContext(AuthContext);
   const { useMessage } = useContext( MsgContext ); 
   const [ logged , setLogged ] = useState( false ); 
   const [ currentAuth , setCurrentAuth ] = useState('Sign in');
@@ -80,10 +80,12 @@ function Auth() {
 
             sessionStorage.setItem('auth', JSON.stringify(response.data));
             setSession(JSON.parse(sessionStorage.getItem('auth')));
+            setCookieSession( response_login.access_token );
 
             useMessage( `Logged as ${name} ... redirecting...` , 'success' , 2000 , 'top' , 'center' );
             sessionStorage.setItem('auth_pass', JSON.stringify({"password":password}) );
             setHasPassword( JSON.parse(sessionStorage.getItem('auth_pass')) );
+            
             setLogged( true );
             setTimeout(()=>{
               window.location='/';
@@ -105,7 +107,7 @@ function Auth() {
   })
 
   return (
-    <section className={`flex flex-col-reverse justify-center m-auto items-center sm:mt-10 lg:flex lg:flex-row lg:justify-center items-center lg:mt-40`}>
+    <section className={`flex flex-col-reverse justify-center m-auto items-center sm:mt-10 lg:flex lg:flex-row lg:justify-center items-center lg:mt-30`}>
       <article className='mt-20 mb-40 lg:mt-20 lg:w-full min-w-[350px] w-ful lg:ml-60 bg-gray-300 shadow-xl m-auto rounded-xl p-10'>
         <div className='w-full'>
           <h4 className='text-gray-700 font-bold text-2xl'>Why to log in?</h4>

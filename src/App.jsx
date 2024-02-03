@@ -20,6 +20,7 @@ import Snackbar_ from './components/Snackbar/Snackbar';
 import { MsgContext } from "./Context/messageContext.jsx";
 import Register from './components/Form/Register';
 import Auth from "./components/Form/Auth.jsx";
+import Checkout from './components/Form/Checkout';
 
 
 function App() {
@@ -95,7 +96,7 @@ function App() {
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    const auth = JSON.parse(sessionStorage.getItem('auth')) || [];
+    const auth = JSON.parse(sessionStorage.getItem('auth')) || false;
     recoveryCart(savedCart);
     recoverySession(auth);
   }, []);
@@ -107,11 +108,11 @@ function App() {
     if (session.length !== 0) {
       localStorage.setItem('cart', JSON.stringify(state.cart));
       sessionStorage.setItem('auth', JSON.stringify(session));
-      sessionStorage.setItem('auth_pass', JSON.stringify({ 'password': session.data.user.password }));
+      sessionStorage.setItem('auth_pass', JSON.stringify({ 'password': session?.data?.user?.password }));
       sessionStorage.setItem('favorites', JSON.stringify(state.favorites));
 
       if (retrievedFavotires.current == false && state.favorites.length === 0) {
-        axios.get(`https://ws-api-tech.online/api/products/${session.data.user.id}`).then((response) => {
+        axios.get(`https://ws-api-tech.online/api/products/${session?.data?.user?.id}`).then((response) => {
           let newJSON = [];
           newJSON = response.data.data[0].products.map((item) => {
             return item.product;
@@ -186,11 +187,11 @@ function App() {
   }
 
   return (
-    <div className={`bg-gray-500 min-h-screen w-full min-w-[350px] relative`}>
+    <div className={`bg-gray-500 min-h-screen w-full min-w-[400px] relative`}>
       <Router basename="/">
       <Header initialState={state} handleFilter={handleFilter} />
           <BR />
-          <Sidebar
+          <Sidebar 
             initialState={
               session.length !== 0 ?
                 [false, state.cart.length, false, false]
@@ -211,6 +212,7 @@ function App() {
             format={{ currentLanguage }}
           /> {products.length !== 0 && <Pagination_ />}<BR /><BR /> </>} />
           <Route exact path="/cart" element={<ShoppingCart cart={state} handleChangeQuantity={handleChangeQuantity} deleteFromCart={deleteFromCart} />} />
+          <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/favorites" element={<Favorites loading={loading} initialState={state} addToCart={addToCart} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} />} />
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/auth" element={<Auth />} />
