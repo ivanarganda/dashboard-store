@@ -78,6 +78,9 @@ export default function useValidateForm() {
 
       }
 
+    }).catch((error) => {
+      const messageError = error.response.data.error.user; 
+      useMessage(`${messageError}`, 'error', 5000, 'top', 'center');
     })
   };
 
