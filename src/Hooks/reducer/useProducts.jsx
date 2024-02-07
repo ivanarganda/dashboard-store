@@ -1,19 +1,37 @@
 export const initialState = {
+
   favorites: JSON.parse(sessionStorage.getItem('favorites')) || [],
   cart: JSON.parse(localStorage.getItem('cart')) || [],
-  totalPriceCart: 0,
+  totalPriceCart: JSON.parse(localStorage.getItem('cart')).map(( item )=>{ return item.quantity * item.specifications.price }) || 0,
   q:'',
   category:''
 };
 
 export const reducer = (state, action) => {
 
-    if (action.type === 'RECOVERY_CART'){
-      return {
-        ...state,
-        cart: action.payload
+  if (action.type === 'RECOVERY_CART') {
+
+    let totalPrice = 0;
+  
+    for (const item of state.cart) {
+      const quantity = parseInt(item.quantity);
+      const price = parseFloat(item.specifications.price); 
+
+      if (!isNaN(quantity) && !isNaN(price)) {
+        // Check if quantity and price are valid numbers
+        totalPrice += quantity * price;
       }
-    } 
+    }
+  
+    console.log(totalPrice);
+  
+    return {
+      ...state,
+      cart: action.payload,
+      totalPrice: state.totalPriceCart, // Set to 0 if totalPrice is still NaN
+    };
+  }
+  
 
     if ( action.type === 'RECOVERY_FAVORITES'){
       return {
