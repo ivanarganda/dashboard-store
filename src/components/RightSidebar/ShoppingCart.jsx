@@ -39,9 +39,7 @@ export default function ShoppingCart(props) {
     // Calculate total price (subtotal price + tax)
     const tax = subtotal * 0.1047; // Assuming 10.47% tax
     let total = subtotal + tax;
-
     total = total.toFixed(2);
-
     setTotalPrice(total);
   }, [itemsShopping, currentQuantity]);
 
