@@ -59,7 +59,7 @@ export default function ShoppingCart(props) {
         <article className='w-1/4 flex flex-row justify-center items-center rounded-xl shadow-xl flex bg-[#1F1D2B] min-w-[350px] m-auto'>
           <form className='flex w-full flex-col p-6 min-w-fit' onSubmit={purchageForm}>
             <div className='flex flex-col relative justify-center w-full min-w-fit mt-2'>
-              <textarea hidden className='relative bg-gray-100 text-lg text-gray-600 font-bold rounded-md p-2 outline-none apearance-none' name='' id='' cols='30' rows='10'></textarea>
+              <textarea hidden className='relative bg-gray-100 text-lg text-gray-600 font-bold rounded-md p-2 outline-none apearance-none' value={ JSON.stringify(cart.cart) } name='budget' id='budget' cols='30' rows='10'></textarea>
               <span className='flex flex-row justify-start items-start w-full m-auto text-gray-300 text-xl mb-1'>Total price: {totalPrice} €</span>
             </div>
             <div className='flex flex-col relative justify-center w-full min-w-fit mt-2'>
@@ -68,8 +68,8 @@ export default function ShoppingCart(props) {
             <div className='flex flex-col relative justify-center w-full min-w-fit mt-2'>
               <span className='flex flex-row justify-start items-start w-full m-auto text-gray-300 text-md mb-1'>IVA tax: 10,47%</span>
             </div>
-            <div className='flex flex-row-reverse relative justify-center items-center w-full gap-5 min-w-fit mt-2'>
-              <button className='flex flex-row bg-green-600 p-2 rounded-md justify-center items-center w-2/3 m-auto text-gray-300 min-w-fi  t text-md mb-1'>Add cupon code</button>
+            <div className='flex flex-row-reverse relative justify-center items-center w-full gap-2 min-w-fit mt-2'>
+              <button className='flex flex-row bg-green-600 p-2 rounded-md justify-center items-center w-2/3 m-auto text-gray-300 min-w-fit t text-md mb-1'>Add cupon code</button>
               <input type='text' className='relative bg-gray-100 text-xs text-gray-600 w-full min-w-fit font-bold rounded-md p-2 outline-none apearance-none' />
             </div>
             <div className='flex flex-row w-full m-auto items-center justify-center mt-1 space-x-20'>
