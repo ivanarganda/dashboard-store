@@ -34,7 +34,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const index = useCallback(() => useIndexSearch(products), [products]);
-  const { session, recoverySession, hasPassword } = useContext(AuthContext);
+  const { session, recoverySession } = useContext(AuthContext);
   const { pagination, setPagination } = useContext(PaginationContext);
   const { useMessage, setColor, positions, setPositions, setTime } = useContext(MsgContext);
   const retrievedFavotires = useRef(false);
